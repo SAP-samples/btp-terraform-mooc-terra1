@@ -86,8 +86,7 @@ With that the necessary information that enables the provider to execute the aut
 
 We laid the foundation for our Terraform journey, namely the basic configuration of the Terraform provider fro SAP BTP as well as the provisioning of the information needed for authentication.
 
-With that we can continue to [Unit 2.2 - Applying the Terraform setup to SAP BTP](../unit_2_2/README.md)
-
+With that let us continue to [Unit 2.2 - Applying the Terraform setup to SAP BTP](../unit_2_2/README.md)
 
 ## Sample Solution 🛟
 
