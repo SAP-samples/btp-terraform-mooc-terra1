@@ -11,7 +11,7 @@ The goal of this unit is to create and apply the configuration of a subaccount o
 
 To continue our Terraform journey we add a new file called `main.tf` in the directory `learning-terraform-on-sapbtp` we created in the previous unit. This file will be the home of your Terraform configuration.
 
-As we want to create a subsccount, we need to know what data to provide to Terraform. Where can we find this information? The perfect place is the Terraform registry that contains the [provider documentation](https://registry.terraform.io/providers/SAP/btp/latest/docs).
+As we want to create a subaccount, we need to know what data to provide to Terraform. Where can we find this information? The perfect place is the Terraform registry that contains the [provider documentation](https://registry.terraform.io/providers/SAP/btp/latest/docs).
 
 We find two types of entities that are part of the provider:
 
@@ -20,14 +20,14 @@ We find two types of entities that are part of the provider:
 
 As we want to create a subaccount, we must take a closer look at the resources in the documentation. Here we find a resource called [`btp_subaccount`](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount) that fits for our needs.
 
-The resource has some mandatory and some optional fields. We have the following requirements for our subaccount that ned to be mapped to the attributes of the resource:
+The resource has some mandatory and some optional fields. We have the following requirements for our subaccount that need to be mapped to the attributes of the resource:
 
-- The `name` of the subaccount should have the value "DEV Project ABC"
-- The `subdomain` of the subaccount should have the value of the name, but all in lower case and spaces should be replaced by dashes. For this unit we hardcode this value as "dev-project-abc"
+- The `name` of the subaccount should have the value `DEV Project ABC`
+- The `subdomain` of the subaccount should have the value of the name, but all in lower case and spaces should be replaced by dashes. For this unit we statically code this value as `dev-project-abc`
 - We want to have beta features enabled
 - We want to have two labels:
-   - one for the stage the subaccount belongs to with the key `stage` and the value "DEV"
-   - one for the cost center with key `costcenter` and value "12345"
+   - one for the stage the subaccount belongs to with the key `stage` and the value `DEV`
+   - one for the cost center with key `costcenter` and value `12345`
 
 We choose the region that is fitting for us.
 
@@ -49,7 +49,7 @@ resource "btp_subaccount" "project_subaccount" {
 }
 ```
 
-This advices Terraform to create a resource of type `btp_subaccount`. We give the resource the name `project subaccount`.
+This tells Terraform to create a resource of type `btp_subaccount`. We give the resource the name `project subaccount`.
 
 > [!TIP]
 > We will see the meaning of the resource name in the next unit "Inspecting the Terraform state".
@@ -71,7 +71,7 @@ Let us apply this first configuration. The application of configurations follows
 
    TODO Picture
 
-1. Next we should make sure that the formating of the code is aligned with the canonical formatting defined for the Hashicorp Configuration language. We execute the following command:
+1. Next we should make sure that the formatting of the code is aligned with the canonical formatting defined for the Hashicorp Configuration language. We execute the following command:
 
    ```bash
    terraform fmt
@@ -98,9 +98,9 @@ Let us apply this first configuration. The application of configurations follows
 
    TODO Picture
 
-   This looks like what we want to achive right? We stored this plan using the `-out` parameter.
+   This looks like what we want to achieve right? We stored this plan using the `-out` parameter.
 
-1. We apply the stored plan anc finally create our first resource on SAP BTP via the command:
+1. We apply the stored plan and finally create our first resource on SAP BTP via the command:
 
    ```bash
    terraform apply "unit21.out"
@@ -116,7 +116,7 @@ Great! We just created our first subaccount on SAP BTP using Terraform. Time for
 
 ## Summary 🪄
 
-We created our first Terraform configuration which provisoned a subacount on SAP BTP. In the course of this provisioning we walked through a typical Terraform flow.
+We created our first Terraform configuration which provisioned a subaccount on SAP BTP. In the course of this provisioning we walked through a typical Terraform flow.
 
 With that let us continue to [Unit 2.3 - Inspecting the Terraform state](../unit_2_3/README.md)
 
