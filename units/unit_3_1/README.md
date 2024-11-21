@@ -21,9 +21,9 @@ You find the sample solution in the folder `units/unit_3_1/solution_u31`.
    - subaccount_name
    - region
    - beta enabled
-   - labels (costcenter, stage)
+   - labels (cost center, stage)
    - usage
-- Validations of costcenter, region and stage
+- Validations of cost center, region and stage
 
 > [!NOTE]
 > Highlights information that users should take into account, even when skimming.

@@ -15,11 +15,11 @@ You find the sample solution in the folder `units/unit_3_4/solution_u34`.
 
 ## Outline (to be deleted)
 
-- New resource envirnment instance
+- New resource environment instance
 - Add variable CF landscape label
 - Add local org-name
 - Create `outputs.tf`
-- Add output af CF API endpoint, ORG_ID and landscape label
+- Add output of CF API endpoint, ORG_ID and landscape label
 
 
 > [!NOTE]

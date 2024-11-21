@@ -40,11 +40,11 @@ provider "btp" {
 ```
 Replace the `<MY GLOBAL ACCOUNT SUBDOMAIN>` with the subdomain of your global account. For a trial account the subdomain has the format `123abc456trial-ga`. Save the changes in the `provider.tf` file.
 
-With this configuration we told Terraform whioch provider and provider version to use as well as how to configure the provider. However, how does Terraform know how to do the authentication to SAP BTP? Let us take a look at this in the next section.
+With this configuration we told Terraform which provider and provider version to use as well as how to configure the provider. However, how does Terraform know how to do the authentication to SAP BTP? Let us take a look at this in the next section.
 
 ### Setting of environment variables
 
-In general the Terraform provider for SAP BTP provides several ways to do the authentication. You find the list in the documenation of the [optional parameters](https://registry.terraform.io/providers/SAP/btp/latest/docs#optional) of the Terraform provider. In this tutorial we will use the authentication via username and password. As a good practice we provide this values via environment variables that will be fetched by the provider during execution. As described in the documentation we must set values for `BTP_USERNAME` and `BTP_PASSWORD`.
+In general the Terraform provider for SAP BTP provides several ways to do the authentication. You find the list in the documentation of the [optional parameters](https://registry.terraform.io/providers/SAP/btp/latest/docs#optional) of the Terraform provider. In this tutorial we will use the authentication via username and password. As a good practice we provide this values via environment variables that will be fetched by the provider during execution. As described in the documentation we must set values for `BTP_USERNAME` and `BTP_PASSWORD`.
 
 Setting the values depends on the operating system you are using:
 
@@ -84,7 +84,7 @@ With that the necessary information that enables the provider to execute the aut
 
 ## Summary 🪄
 
-We laid the foundation for our Terraform journey, namely the basic confioguration of the Terraform provider fro SAP BTP as well as the provisioning of the information needed for authentication.
+We laid the foundation for our Terraform journey, namely the basic configuration of the Terraform provider fro SAP BTP as well as the provisioning of the information needed for authentication.
 
 With that we can continue to [Unit 2.2 - Applying the Terraform setup to SAP BTP](../unit_2_2/README.md)
 

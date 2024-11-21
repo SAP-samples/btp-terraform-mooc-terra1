@@ -2,7 +2,7 @@
 
 ## Goal 🎯
 
-## Making the handover to development smoooth 🛠️
+## Making the handover to development smooth 🛠️
 
 ## Summary 🪄
 

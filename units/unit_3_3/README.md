@@ -1,9 +1,9 @@
-# Unit 3.3 - Adding additonal resources to the Terraform Configuration
+# Unit 3.3 - Adding additional resources to the Terraform Configuration
 
 
 ## Goal 🎯
 
-## Adding entitlements, subscriptios and service instances 🛠️
+## Adding entitlements, subscriptions and service instances 🛠️
 
 ## Summary 🪄
 

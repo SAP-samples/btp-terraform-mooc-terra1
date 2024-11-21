@@ -8,6 +8,7 @@ CodeQL
 config
 Copilot
 customizations
+DEV
 DCO
 dependabot
 devcontainer
@@ -15,10 +16,13 @@ dir
 faq
 Github
 github
+globalaccount
+hanatrial
 html
 https
 HCL
 HashiCorp
+hashicorp
 IdP
 json
 JSON
@@ -27,6 +31,7 @@ macOS
 md
 NextSteps
 OpenSSF
+ondemand
 Pre
 pre
 PowerShell
@@ -34,6 +39,7 @@ powershell
 README
 readme
 runtime
+reuseable
 spf
 SSO
 sso
@@ -52,6 +58,7 @@ tf
 toolchain
 UIs
 UI
+UUID
 VS
 YAML
 yaml
