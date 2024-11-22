@@ -112,7 +112,8 @@ Let us apply this first configuration. The application of configurations follows
 Great! We just created our first subaccount on SAP BTP using Terraform. Time for a short coffee break ☕, what do you think 😎
 
 > [!NOTE]
-> The `terraform init` command must be usually executed only once when starting in a new directory. As long as no additional Terraform provider is added to the configuration or modules are added we can skip this command.
+> 1. The `terraform init` command must be usually executed only once when starting in a new directory. As long as no additional Terraform provider is added to the configuration or modules are added we can skip this command.
+> 2. The stored plan is a binary format that we cannot directly inspect. The Terraform CLI provides the `terraform show` command to transfer the content into a human readable format.
 
 ## Summary 🪄
 
