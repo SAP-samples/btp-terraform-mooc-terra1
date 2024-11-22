@@ -1,5 +1,5 @@
 variable "globalaccount" {
-  description = "Subdomain of global account"
+  description = "Subdomain of the global account"
   type        = string
 }
 

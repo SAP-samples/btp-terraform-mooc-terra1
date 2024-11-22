@@ -2,7 +2,7 @@
 
 ## Goal 🎯
 
-The goal of this unit is to take a closer look at the *state* file of Terraform. We will investigate what information is stored in this file
+The goal of this unit is to take a closer look at the *state* file of Terraform. We will investigate what information is stored in this file.
 
 ## A closer look at the Terraform state 🛠️
 
