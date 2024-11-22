@@ -34,7 +34,7 @@ resource "btp_subaccount_entitlement" "feature_flags_service_lite" {
 resource "btp_subaccount_entitlement" "feature_flags_dashboard_app_lite" {
   subaccount_id = btp_subaccount.project_subaccount.id
   service_name  = "feature-flags-dashboard"
-  plan_name     = "lite"
+  plan_name     = "dashboard"
 }
 
 data "btp_subaccount_service_plan" "alert_notification_service_standard" {
