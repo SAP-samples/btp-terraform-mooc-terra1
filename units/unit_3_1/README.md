@@ -2,13 +2,13 @@
 
 ## Goal 🎯
 
-The goal of this unit is to make the our configuration more flexible by removin the fix values and replacing them with *input variables*.
+The goal of this unit is to make the our configuration more flexible by removing the fix values and replacing them with *input variables*.
 
 ## Making things more flexible with variables 🛠️
 
 ### Basics about input variables
 
-Up to now we used static values in our Terraform configuration, like the subdomain of the global account in the `provider.tf` file or the name of the subaccount in the `main.tf`. This restricts the way we can use the configuration to exactly one scenario, but we want to resue the configuration to setup different subaccounts with different parameters.
+Up to now we used static values in our Terraform configuration, like the subdomain of the global account in the `provider.tf` file or the name of the subaccount in the `main.tf`. This restricts the way we can use the configuration to exactly one scenario, but we want to reuse the configuration to setup different subaccounts with different parameters.
 
 To achieve this we must define so called [input variables](https://developer.hashicorp.com/terraform/language/values/variables) or short *variables*.
 
@@ -38,7 +38,7 @@ However there are several optional attributes that we can use to make the usage 
 
 Terraform offers several basic types (`string`, `number`, `bool`) as well as complex types (`list`, `set`, `map`, `object`, `tuple`).
 
-Variables are usually stored in a dedicated file calles `variables.tf`. The are referenced in the Terraform configuration via `var.<variable_identifier>`.
+Variables are usually stored in a dedicated file called `variables.tf`. The are referenced in the Terraform configuration via `var.<variable_identifier>`.
 
 With these basics we are good to start with rewriting our configuration using variables.
 
@@ -140,20 +140,20 @@ We therefore create a new file called `terraform.tfvars` in the directory `learn
 globalaccount = "<YOUR GLOBALACCOUNT_SUBDOMAIN>"
 ```
 
-Replace the placeholde `<YOUR GLOBALACCOUNT_SUBDOMAIN>` with the subdomain of your global account.
+Replace the placeholder `<YOUR GLOBALACCOUNT_SUBDOMAIN>` with the subdomain of your global account.
 
 > [!NOTE]
 > We named the file `terraform.tfvars` as this will be automatically picjed up when executing a command of the Terraform CLI. If you want to name it differently you must add `-var-file=filename` to point the CLI to the right file.
 
-With this the setup is finished now at least for teh configuration we provisioned before. But wait a second: aren't there some constraints concerning the variables we defined? We did not think about that when we used statci values, but now, maybe it would make sense to bring in some additional validation. Let's do that
+With this the setup is finished now at least for the configuration we provisioned before. But wait a second: aren't there some constraints concerning the variables we defined? We did not think about that when we used static values, but now, maybe it would make sense to bring in some additional validation. Let's do that
 
 ### Adding validations
 
-Revising our variables it makes sense to add the folowing validations:
+Revising our variables it makes sense to add the following validations:
 
-- as we are on an SAP BTP trial account it makes snese to limit the allowed regions to `us10` and `ap21`.
-- the stage that we define should match the stages that are used in our company or organization. They should be restricted ot the values `DEV`, `TEST` and `PROD`.
-- the costcenter also needs to have a predefined format namely 5 integers between 0 and 9.
+- as we are on an SAP BTP trial account it makes sense to limit the allowed regions to `us10` and `ap21`.
+- the stage that we define should match the stages that are used in our company or organization. They should be restricted to the values `DEV`, `TEST` and `PROD`.
+- the cost center also needs to have a predefined format namely 5 integers between 0 and 9.
 
 As we have learned the `variable` block has a `validation` block that we can use to implement the validations. The `validation` has the following structure:
 
@@ -169,7 +169,7 @@ As we can see we have two arguments:
 - the `condition` that points to an expression that must use the value of the variable to return true if the value is valid, or false if it is invalid.
 - The `error_message` that can hold any expression that resolves to a string.
 
-As an additonal building block that we will use to define the conditions we will especially make use of [functions](https://developer.hashicorp.com/terraform/language/functions) that Terraform provides by default.
+As an additional building block that we will use to define the conditions we will especially make use of [functions](https://developer.hashicorp.com/terraform/language/functions) that Terraform provides by default.
 
 Let us cover the first constraint for the region. We want to check if the value provided for the variable is contained in a list that we define. We can use the [contains](https://developer.hashicorp.com/terraform/language/functions/contains) function for that which validates if a given value is part of a list.
 
@@ -188,7 +188,7 @@ variable "subaccount_region" {
 ```
 As `error_message` we added a plain string which is good enough in our setup.
 
-We use the same approch to satisfy the constraint for the stage of the subaccount which leads us to the following code:
+We use the same approach to satisfy the constraint for the stage of the subaccount which leads us to the following code:
 
 ```terraform
 variable "subaccount_stage" {
@@ -202,11 +202,11 @@ variable "subaccount_stage" {
 }
 ```
 
-Last challenge is the costcenter. Here we probably need to check via a regualr expression. Skimming through the documentation for function we have a [regex](https://developer.hashicorp.com/terraform/language/functions/regex) function that provides what we need to evaluate a regualr expression. Taking a second look at the documentation we see that the function does not return a boolean value that we need as condition.
+Last challenge is the cost center. Here we probably need to check via a regular expression. Skimming through the documentation for function we have a [regex](https://developer.hashicorp.com/terraform/language/functions/regex) function that provides what we need to evaluate a regular expression. Taking a second look at the documentation we see that the function does not return a boolean value that we need as condition.
 
 Here another function helps us out namely the [can](https://developer.hashicorp.com/terraform/language/functions/can) function that according to its documentation evaluates the given expression and returns a boolean value indicating whether the expression produced a result without any errors.
 
-With that we are good to go, so let us add the costcenter validation leading to the following code:
+With that we are good to go, so let us add the cost center validation leading to the following code:
 
 ```terraform
 variable "project_costcenter" {
@@ -234,7 +234,7 @@ The output should look like this:
 
 TODO Picture
 
-That is what we wanted to see and our first small refatoring of the configuration is complete.
+That is what we wanted to see and our first small refactoring of the configuration is complete.
 
 ## Summary 🪄
 
@@ -252,7 +252,7 @@ You find the sample solution in the folder `units/unit_3_1/solution_u31`.
 - [Variables and outputs](https://developer.hashicorp.com/terraform/language/values)
 - [Input variables](https://developer.hashicorp.com/terraform/language/values/variables)
 - [Input variables - type constraints](https://developer.hashicorp.com/terraform/language/values/variables#type-constraints)
-- [nput variables - assigning values](https://developer.hashicorp.com/terraform/language/values/variables#assigning-values-to-root-module-variables)
+- [Input variables - assigning values](https://developer.hashicorp.com/terraform/language/values/variables#assigning-values-to-root-module-variables)
 - [Input variable validation](https://developer.hashicorp.com/terraform/language/expressions/custom-conditions#input-variable-validation)
 - [Terraform functions](https://developer.hashicorp.com/terraform/language/functions)
 
