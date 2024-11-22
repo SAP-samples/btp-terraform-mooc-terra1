@@ -33,12 +33,12 @@ However there are several optional attributes that we can use to make the usage 
 - `description` - This specifies the input variable's documentation. We recommend using this whenever you define a variable.
 - `default` - Add this to define a default value for the input variable. If we add a value here, the variable becomes *optional*.
 - `sensitive` - Add this to make Terraform aware that the variable contains sensitive content. This limits Terraform UI output when the variable is used in configuration. However, the value will still be stored in the Terraform state.
-- `validation` - This attributes allows us to define additional validation rules on top of the type constraints
-- `nullable` - If you want to specify if the variable can not be null we must set this value to `false`. The default value is `true`
+- `validation` - This attributes allows us to define additional validation rules on top of the type constraints.
+- `nullable` - If you want to specify if the variable can not be null, we must set this value to `false`. The default value is `true`.
 
 Terraform offers several basic types (`string`, `number`, `bool`) as well as complex types (`list`, `set`, `map`, `object`, `tuple`).
 
-Variables are usually stored in a dedicated file called `variables.tf`. The are referenced in the Terraform configuration via `var.<variable_identifier>`.
+Variables are usually stored in a dedicated file called `variables.tf`. They are referenced in the Terraform configuration via `var.<variable_identifier>`.
 
 With these basics we are good to start with rewriting our configuration using variables.
 
@@ -148,7 +148,9 @@ Replace the placeholder `<YOUR GLOBALACCOUNT_SUBDOMAIN>` with the subdomain of y
 > [!NOTE]
 > We named the file `terraform.tfvars` as this will be automatically picjed up when executing a command of the Terraform CLI. If you want to name it differently you must add `-var-file=filename` to point the CLI to the right file.
 
-With this the setup is finished now at least for the configuration we provisioned before. But wait a second: aren't there some constraints concerning the variables we defined? We did not think about that when we used static values, but now, maybe it would make sense to bring in some additional validation. Let's do that
+With this the setup is finished now at least for the configuration we provisioned before. But wait a second: aren't there some constraints concerning the variables we defined? We did not think about that when we used static values, but now, maybe it would make sense to bring in some additional validation. 
+
+Let's do that!
 
 ### Adding validations
 
@@ -164,7 +166,7 @@ As we have learned the `variable` block has a `validation` block that we can use
 validation {
     condition     = <Any expression that returns a boolean value>
     error_message = "Put a helpful error message here"
-  }
+}
 ```
 
 As we can see we have two arguments:
