@@ -2,6 +2,8 @@ APIs
 autocompletion
 BTP
 btp
+checksum
+checksums
 CLA
 CLI
 CodeQL

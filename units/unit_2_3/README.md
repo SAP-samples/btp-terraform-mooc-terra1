@@ -8,7 +8,7 @@ The goal of this unit is to take a closer look at the *state* file of Terraform.
 
 ### Basics about the state file
 
-Taking a look at the file system, some things have chhanged after the last unit when we applied our configuration for the first time.
+Taking a look at the file system, some things have changed after the last unit when we applied our configuration for the first time.
 
 The first change that we see is a new directory called `.terraform`.
 
@@ -30,7 +30,7 @@ The state file is stored in a human-readable format i.e., as JSON file. You can 
 > The state can contain sensitive data, that is stored in unencrypted in the JSON file of the state. Hence, for productive usage you must make sure that the state file is encrypted.
 
 However, you should *never* edit the state file via the editor. This could lead to a corrupted state file which needs to be fixed before any further action via Terraform can take place.
-But how should we interact then with this file? The asnwer is: via the Teraform CLI. The CLI offers several commands to read the data from the state as well as to modify data in the state. In this tutorial we will focus on the reading part.
+But how should we interact then with this file? The answer is: via the Terraform CLI. The CLI offers several commands to read the data from the state as well as to modify data in the state. In this tutorial we will focus on the reading part.
 
 ### Reading the state file
 
@@ -55,7 +55,7 @@ The output looks like this:
 
 TODO picture
 
-As expected we see the one resource we created namely the so called *address* of the resource. To dive into the detials of a single resource of the list, execute the command:
+As expected we see the one resource we created namely the so called *address* of the resource. To dive into the details of a single resource of the list, execute the command:
 
 ```bash
 terraform state show '<address of the resource>'
