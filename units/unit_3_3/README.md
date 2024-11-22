@@ -2,7 +2,7 @@
 
 ## Goal 🎯
 
-The goal of this unit is to make add additional resources to out configuration. In addition we will see how to make use of *data sources* and manage *explicit depenendcies* between resources.
+The goal of this unit is to make add additional resources to out configuration. In addition we will see how to make use of *data sources* and manage *explicit dependencies* between resources.
 
 ## Adding entitlements, subscriptions and service instances 🛠️
 
@@ -10,8 +10,8 @@ The goal of this unit is to make add additional resources to out configuration. 
 
 Up to now we have configured a new subaccount. Now we want to add some more resources to it namely:
 
-- Entitlements for the alert-notfication service, the feature-flag service as well as the feature-flag dashboard application
-- A service instance of the alert-notfication service
+- Entitlements for the alert-notification service, the feature-flag service as well as the feature-flag dashboard application
+- A service instance of the alert-notification service
 - A subscription of the feature-flag dashboard application
 
 Some stuff to do, but we can manage that step by step. We already know that we find these resources in the Terraform documentation, so let us get started
@@ -92,7 +92,7 @@ Let us move on to the service instance.
 
 We already know the drill: first we take a look at the documentation to find the fitting resource, in this case [`btp_subaccount_service_instance`](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_service_instance).
 
-Taking acloser look at the [example usage](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_service_instance#example-usage) section, we see that we need a service plan ID to create a service instance. That makes sense, but where to we get this from?
+Taking a closer look at the [example usage](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_service_instance#example-usage) section, we see that we need a service plan ID to create a service instance. That makes sense, but where to we get this from?
 
 Maybe the entitlements already contain this field, at least there is something promising mentioned in the [documentation](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_entitlement) namely the field `plan_id`. Let us check what is in the state by executing:
 
@@ -120,7 +120,7 @@ resource "btp_subaccount_entitlement" "alert_notification_service_standard" {
 
 That does not look like the technical ID that we need for the service instance creation. What other options do we have?
 
-The Terrafork provider offers besides the resources also so called [*data sources*](https://developer.hashicorp.com/terraform/language/data-sources). Data sources are provided to read data from real-world resources on the platform and use the data in the Terraform configuration.
+The Terraform provider offers besides the resources also so called [*data sources*](https://developer.hashicorp.com/terraform/language/data-sources). Data sources are provided to read data from real-world resources on the platform and use the data in the Terraform configuration.
 
 Indeed there is a data source that should help us namely [`btp_subaccount_service_plan`](https://registry.terraform.io/providers/SAP/btp/latest/docs/data-sources/subaccount_service_plan) which allows us to read the data for a service plan by plan name and offering name.
 
@@ -173,7 +173,7 @@ data "btp_subaccount_service_plan" "alert_notification_service_standard" {
   depends_on    = [btp_subaccount_entitlement.alert_notification_service_standard]
 }
 ```
-We added the `depends_on` meta argument and now Terraform knows that the resource for the entitlement must be executed successfull before the data source can be executed. The service instance resource depends on the data source due to the service plan ID, so the execution sequence is we want it to be.
+We added the `depends_on` meta argument and now Terraform knows that the resource for the entitlement must be executed successfully before the data source can be executed. The service instance resource depends on the data source due to the service plan ID, so the execution sequence is we want it to be.
 
 > [!NOTE]
 > In general, Terraform treis to execute all data sources right at the beginning of a Terraform execution.
@@ -241,7 +241,7 @@ The result should look like this:
 
 TODO screenshot
 
-And with that we apply the change to our subbaccount:
+And with that we apply the change to our subaccount:
 
 ```bash
 terraform apply 'unit31.out'
@@ -255,7 +255,7 @@ What a ride, but we made it. We added entitlements, create a service instance as
 
 ## Summary 🪄
 
-We intriduced several new resources. Through the course of provisioning these resources we also made use of data sources to fetch information from the SAP BTP and learned about dependency management of Terraform as well as how to define explicit dependencies.
+We introduced several new resources. Through the course of provisioning these resources we also made use of data sources to fetch information from the SAP BTP and learned about dependency management of Terraform as well as how to define explicit dependencies.
 
 With that let us continue to [Unit 3.4 - Setting up a Cloud Foundry environment via Terraform](../unit_3_4/README.md)
 
