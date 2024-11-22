@@ -52,6 +52,6 @@ resource "btp_subaccount_service_instance" "alert_notification_service_standard"
 resource "btp_subaccount_subscription" "feature_flags_dashboard_app_lite" {
   subaccount_id = btp_subaccount.project_subaccount.id
   app_name      = "feature-flags-dashboard"
-  plan_name     = "lite"
+  plan_name     = "dashboard"
   depends_on    = [btp_subaccount_entitlement.feature_flags_dashboard_app_lite]
 }

@@ -31,7 +31,7 @@ resource "btp_subaccount_entitlement" "feature_flags_service_lite" {
   plan_name     = "lite"
 }
 
-resource "btp_subaccount_entitlement" "feature_flags_dashboard_app_lite" {
+resource "btp_subaccount_entitlement" "feature_flags_dashboard_app" {
   subaccount_id = btp_subaccount.project_subaccount.id
   service_name  = "feature-flags-dashboard"
   plan_name     = "dashboard"
@@ -50,11 +50,11 @@ resource "btp_subaccount_service_instance" "alert_notification_service_standard"
   name           = "${local.service_name_prefix}-alert-notification"
 }
 
-resource "btp_subaccount_subscription" "feature_flags_dashboard_app_lite" {
+resource "btp_subaccount_subscription" "feature_flags_dashboard_app" {
   subaccount_id = btp_subaccount.project_subaccount.id
   app_name      = "feature-flags-dashboard"
-  plan_name     = "lite"
-  depends_on    = [btp_subaccount_entitlement.feature_flags_dashboard_app_lite]
+  plan_name     = "dashboard"
+  depends_on    = [btp_subaccount_entitlement.feature_flags_dashboard_app]
 }
 
 data "btp_subaccount_environments" "all" {

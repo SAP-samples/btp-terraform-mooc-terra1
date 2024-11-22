@@ -220,7 +220,14 @@ variable "project_costcenter" {
 }
 ```
 
-With that we have achieved our goal and extracted variables and even added some validations. Now we should check if we messed something up after the rework.
+With that we have achieved our goal and extracted variables and even added some validations. Let's ensure that everything is formatted and static validation passes:
+
+```bash
+terraform fmt
+terraform validate
+```
+
+No issues found. Now we should check if we messed something up after the rework.
 
 ### Executing the changed files
 
@@ -242,7 +249,6 @@ We introduced input variables to our configuration to make the setup more flexib
 
 With that let us continue to [Unit 3.2 - Using locals](../unit_3_2/README.md)
 
-
 ## Sample Solution 🛟
 
 You find the sample solution in the folder `units/unit_3_1/solution_u31`.
@@ -255,30 +261,3 @@ You find the sample solution in the folder `units/unit_3_1/solution_u31`.
 - [Input variables - assigning values](https://developer.hashicorp.com/terraform/language/values/variables#assigning-values-to-root-module-variables)
 - [Input variable validation](https://developer.hashicorp.com/terraform/language/expressions/custom-conditions#input-variable-validation)
 - [Terraform functions](https://developer.hashicorp.com/terraform/language/functions)
-
-## Outline (to be deleted)
-
-- Create `variables.tf`
-- Extract variables:
-   - global account subdomain
-   - subaccount_name
-   - region
-   - beta enabled
-   - labels (cost center, stage)
-   - usage
-- Validations of cost center, region and stage
-
-> [!NOTE]
-> Highlights information that users should take into account, even when skimming.
-
-> [!TIP]
-> Optional information to help a user be more successful.
-
-> [!IMPORTANT]
-> Crucial information necessary for users to succeed.
-
-> [!WARNING]
-> Critical content demanding immediate user attention due to potential risks.
-
-> [!CAUTION]
-> Negative potential consequences of an action.

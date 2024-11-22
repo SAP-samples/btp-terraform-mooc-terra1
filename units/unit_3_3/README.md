@@ -42,14 +42,26 @@ resource "btp_subaccount_entitlement" "feature_flags_service_lite" {
   plan_name     = "lite"
 }
 
-resource "btp_subaccount_entitlement" "feature_flags_dashboard_app_lite" {
+resource "btp_subaccount_entitlement" "feature_flags_dashboard_app" {
   subaccount_id = btp_subaccount.project_subaccount.id
   service_name  = "feature-flags-dashboard"
-  plan_name     = "lite"
+  plan_name     = "dashboard"
 }
 ```
 
-This should give us the entitlements that we need. Let us apply this change to our subaccount. First we do the planning
+This should give us the entitlements that we need. Let us apply this change to our subaccount. First we make sure that our code is nicely formatted and execute:
+
+```bash
+terraform fmt
+```
+
+and
+
+```bash
+terraform validate
+```
+
+No issues found, then we do the planning
 
 ```bash
 terraform plan -out=unit31.out
@@ -90,7 +102,7 @@ terraform state show btp_subaccount_entitlement.alert_notification_service_stand
 
 The result is:
 
-```bash
+```terraform
 # btp_subaccount_entitlement.alert_notification_service_standard:
 resource "btp_subaccount_entitlement" "alert_notification_service_standard" {
     amount        = 1
@@ -137,12 +149,115 @@ First we read the service plan ID via the data source specified with the `data` 
 service_name_prefix  = lower(replace("${var.subaccount_stage}-${var.project_name}", " ", "-"))
 ```
 
-### Handling of explicit dependencies
+Everything should be in place now for the creation of the service instance provisioning. But let us do a check:
+
+- We entitled the subaccount
+- We looked up the technical ID of the service plan
+- We provision the service instance
+
+This is the sequence in which the actions must be executed. How does Terraform know about that? Let us take a look at the handling of dependencies in the next section.
+
+### Handling of dependencies
+
+The provisioning of resources by Terraform is executed in parallel. By default 10 resources are provisioned in parallel. When setting up the execution plan Terraform will consider dependencies between resources if it can detect them. The detection is possible whenever an attribute of a resource is used by another resource as attribute value.
+
+Looking at our configuration we see that the ID of the subaccount `btp_subaccount.project_subaccount.id` is used all over the place. Consequently, Terraform knows that it must provision the `btp_subaccount` resource first, before working on the other resources that use the ID.
+
+However, there is no such connection between the entitlement and the data source for the service plan. Here we must tell Terraform there is a *explicit dependency* that it must take into account when creating the execution plan. We achieve this by the meta argument [`depends_on`](https://developer.hashicorp.com/terraform/language/meta-arguments/depends_on). In this argument we can specify the address of the resource that the annotated resource depends on. In our case we modify the code for the data source in the `main.tf`:
+
+```terraform
+data "btp_subaccount_service_plan" "alert_notification_service_standard" {
+  subaccount_id = btp_subaccount.project_subaccount.id
+  name          = "standard"
+  offering_name = "alert-notification"
+  depends_on    = [btp_subaccount_entitlement.alert_notification_service_standard]
+}
+```
+We added the `depends_on` meta argument and now Terraform knows that the resource for the entitlement must be executed successfull before the data source can be executed. The service instance resource depends on the data source due to the service plan ID, so the execution sequence is we want it to be.
+
+> [!NOTE]
+> In general, Terraform treis to execute all data sources right at the beginning of a Terraform execution.
+
+Now we are set and can apply the changes. Of course, we first make sure that the code is formatted and validated, right 😉.
+
+```bash
+terraform fmt
+terraform validate
+```
+
+No issues found, then let's plan the change:
+
+```bash
+terraform plan -out=unit31.out
+```
+
+This should result in:
+
+TODO picture
+
+Looks good, let's apply things then:
+
+```bash
+terraform apply 'unit31.out'
+```
+
+We should see an output like this:
+
+TODO picture
+
+Great, only one more thing to do, subscribing to the application.
 
 ### Adding a subscription
 
+We are experts in the meanwhile when it comes to adding resources. A subscription is covered by the resource [btp_subaccount_subscription ](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_subscription).
+
+In contrast to the service instance we can provide the plan via its name, so no data source needed in this case but we must not forget the dependency to the entitlement.
+
+We add the following code to the `main.tf`:
+
+```terraform
+resource "btp_subaccount_subscription" "feature_flags_dashboard_app" {
+  subaccount_id = btp_subaccount.project_subaccount.id
+  app_name      = "feature-flags-dashboard"
+  plan_name     = "dashboard"
+  depends_on    = [btp_subaccount_entitlement.feature_flags_dashboard_app]
+}
+```
+
+And another round of formatting and validating:
+
+```bash
+terraform fmt
+terraform validate
+```
+
+Then we do the planning:
+
+```bash
+terraform plan -out=unit31.out
+```
+
+The result should look like this:
+
+TODO screenshot
+
+And with that we apply the change to our subbaccount:
+
+```bash
+terraform apply 'unit31.out'
+```
+
+The result should look like this:
+
+TODO screenshot
+
+What a ride, but we made it. We added entitlements, create a service instance as well as an app subscription in our subaccount.
+
 ## Summary 🪄
 
+We intriduced several new resources. Through the course of provisioning these resources we also made use of data sources to fetch information from the SAP BTP and learned about dependency management of Terraform as well as how to define explicit dependencies.
+
+With that let us continue to [Unit 3.4 - Setting up a Cloud Foundry environment via Terraform](../unit_3_4/README.md)
 
 ## Sample Solution 🛟
 
@@ -150,27 +265,4 @@ You find the sample solution in the folder `units/unit_3_3/solution_u33`.
 
 ## Further References 📝
 
-## Outline (to be deleted)
-
-- Add new resources to `main.tf`
-- add local service-name-prefix
-- Entitlements for 2 services (`alert-notification`, `feature-flags`) and 1 app subscription (`feature-flags-dashboard`)
-- data source for service plan => depends on entitlement
-- Resources for service instance creation alert notification (feature flag only possible with CF)
-- Resource for app subscription
-
-
-> [!NOTE]
-> Highlights information that users should take into account, even when skimming.
-
-> [!TIP]
-> Optional information to help a user be more successful.
-
-> [!IMPORTANT]
-> Crucial information necessary for users to succeed.
-
-> [!WARNING]
-> Critical content demanding immediate user attention due to potential risks.
-
-> [!CAUTION]
-> Negative potential consequences of an action.
+-  [Handling explicit dependencies](https://developer.hashicorp.com/terraform/language/meta-arguments/depends_on)
