@@ -63,7 +63,7 @@ The open point is now: how can we handle the fallback logic regarding the landsc
 - Fetch the information about the environments via the data source `btp_subaccount_environments`
 - If there is no value provided via the variable, use the information from the data source. Sounds like a [ternary expression](https://developer.hashicorp.com/terraform/language/expressions/conditionals) that Terraform provides out of the box.
 
-There is one more thing we need to consider: the data source might return mutliple landscape labels for for the Cloud Foundry environment. We decide to use the first one returned by the data source. But can we rely on the sequence returned by the data source? Of course not, so we need to remember the value that we used. It is getting more complicated than expected, but Terraform has a dedicated resource to handle situations like this namely the resource [`terraform_data`](https://developer.hashicorp.com/terraform/language/resources/terraform-data).
+There is one more thing we need to consider: the data source might return multiple landscape labels for for the Cloud Foundry environment. We decide to use the first one returned by the data source. But can we rely on the sequence returned by the data source? Of course not, so we need to remember the value that we used. It is getting more complicated than expected, but Terraform has a dedicated resource to handle situations like this namely the resource [`terraform_data`](https://developer.hashicorp.com/terraform/language/resources/terraform-data).
 
 Let's refine what we need to do:
 
