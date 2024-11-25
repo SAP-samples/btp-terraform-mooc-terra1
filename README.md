@@ -35,11 +35,6 @@ Please edit this file as it is the primary description file for your project. Yo
 
 🐞 - If you find a bug, feel free to create a [bug report](https://github.com/SAP-samples/btp-terraform-mooc-terra1/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml&title=%5BBUG%5D).
 
-For more information about how to contribute, the project structure, and additional contribution information, see our [Contribution Guidelines](CONTRIBUTING.md).
-
-
-For additional support, [ask a question in SAP Community](https://answers.sap.com/questions/ask.html).
-
 ## Contributing
 If you wish to contribute code, offer fixes or improvements, please send a pull request. Due to legal reasons, contributors will be asked to accept a DCO when they create the first pull request to this project. This happens in an automated fashion during the submission process. SAP uses [the standard DCO text of the Linux Foundation](https://developercertificate.org/).
 
