@@ -55,7 +55,7 @@ resource "btp_subaccount_environment_instance" "cloudfoundry" {
 }
 ```
 
- [!NOTE]
+>[!NOTE]
 > As the tutorial is intended for the trial landscape we used `trial` as value for `plan_name`. If you are executing the comfiguration you must switch the the value `standard`.
 
 The open point is now: how can we handle the fallback logic regarding the landscape label. The logic would be:
@@ -183,7 +183,12 @@ The result should look like this:
 
 TODO picture
 
-Looks good. It was a bit more work than we expected, but here we are having a Cloud Foundry environment in our subaccount.
+Looks good. we also see the explicitly set outputs.
+
+>[!TIP]
+> You can always access the outputs via the Terraform CLI and the command [`terraform output`](https://developer.hashicorp.com/terraform/cli/commands/output)
+
+It was a bit more work than we expected, but here we are having a Cloud Foundry environment in our subaccount.
 
 ## Summary 🪄
 
@@ -200,3 +205,4 @@ You find the sample solution in the folder `units/unit_3_4/solution_u34`.
 - [Conditionals](https://developer.hashicorp.com/terraform/language/expressions/conditionals)
 - [`terraform_data`](https://developer.hashicorp.com/terraform/language/resources/terraform-data)
 - [`for` expression](https://developer.hashicorp.com/terraform/language/expressions/for)
+- [`terraform output` command](https://developer.hashicorp.com/terraform/cli/commands/output)

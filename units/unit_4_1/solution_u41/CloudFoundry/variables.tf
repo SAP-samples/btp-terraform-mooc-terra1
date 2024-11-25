@@ -27,9 +27,11 @@ variable "subaccount_stage" {
 variable "cf_space_manager" {
   description = "The Cloud Foundry space manager"
   type        = string
+  sensitive   = true
 }
 
 variable "cf_space_developer" {
   description = "The Cloud Foundry space developer"
   type        = string
+  sensitive   = true
 }
