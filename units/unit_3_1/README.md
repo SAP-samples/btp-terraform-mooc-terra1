@@ -117,6 +117,9 @@ resource "btp_subaccount" "project_subaccount" {
 }
 ```
 
+> [!TIP]
+> It is a good practise to have the variables in alphabetical order. For the sake of the units we omit this parctise and append new variables to the files which makes it easier for you to see waht changed when looking into the solution. In a real setup we recommend sticking to this practise.
+
 Looks good and we have gained more flexibility when we want to use the same configuration for different subaccounts. But, how can we do that? Let us look at this in the next section.
 
 ### Providing values for variables
