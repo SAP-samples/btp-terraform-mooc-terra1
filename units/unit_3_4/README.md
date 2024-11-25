@@ -8,11 +8,11 @@ The goal of this unit is to add a *Cloud Foundry* environment to the setup. In a
 
 ### Setting up Cloud Foundry
 
-One central ingredient for the application development on SAP BTP is the avialability of a runtime environment. In this unit we will add such an environment namely a Cloud Foundry environment to the configuration.
+One central ingredient for the application development on SAP BTP is the availability of a runtime environment. In this unit we will add such an environment namely a Cloud Foundry environment to the configuration.
 
-As before ourr first stop is the Terraform documentation namely the resource [btp_subaccount_environment_instance](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_environment_instance). This generic resource enables us to create a Cloud Foundry or Kyma environment depending on the parameters provided.
+As before our first stop is the Terraform documentation namely the resource [btp_subaccount_environment_instance](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_environment_instance). This generic resource enables us to create a Cloud Foundry or Kyma environment depending on the parameters provided.
 
-Let us take a closer look at the parameters. It seems like the "usual suspects" that we would expect like `name`, `environment_type`, `service_name` and `plan_name` are expected as layed out in the [example usage](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_environment_instance#example-usage) provided in the documentation.
+Let us take a closer look at the parameters. It seems like the "usual suspects" that we would expect like `name`, `environment_type`, `service_name` and `plan_name` are expected as laid out in the [example usage](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_environment_instance#example-usage) provided in the documentation.
 
 But there seems to be one special parameter namely the landscape label. We can for sure make that a variable and let the user provide a value for that. But wouldn't it be nice to have some kind of fallback solution and get some default value for that in case nothing was provided.
 
@@ -60,14 +60,14 @@ resource "btp_subaccount_environment_instance" "cloudfoundry" {
 
 The open point is now: how can we handle the fallback logic regarding the landscape label. The logic would be:
 
-- Fetch the information about the envionments via the data source `btp_subaccount_environments`
+- Fetch the information about the environments via the data source `btp_subaccount_environments`
 - If there is no value provided via the variable, use the information from the data source. Sounds like a [ternary expression](https://developer.hashicorp.com/terraform/language/expressions/conditionals) that Terraform provides out of the box.
 
 There is one more thing we need to consider: the data source might return mutliple landscape labels for for the Cloud Foundry environment. We decide to use the first one returned by the data source. But can we rely on the sequence returned by the data source? Of course not, so we need to remember the value that we used. It is getting more complicated than expected, but Terraform has a dedicated resource to handle situations like this namely the resource [`terraform_data`](https://developer.hashicorp.com/terraform/language/resources/terraform-data).
 
 Let's refine what we need to do:
 
-- Fetch the information about the envionments via the data source `btp_subaccount_environments`
+- Fetch the information about the environments via the data source `btp_subaccount_environments`
 - Determine the landscape label to use
 - Use the `terraform_data` resource to store the used landscape label
 - Configure the resource with the landscape label stored in the `terraform_data` resource
@@ -115,7 +115,7 @@ Having an environment instance in place, we would also explicitly return some da
 - The API URL of Cloud Foundry
 - The ID of the Cloud Foundry organization
 
-We do not want to inspcet the state for that, so what option do we have. We can add [*output values*](https://developer.hashicorp.com/terraform/language/values/outputs)  or outputs which we will do in the next section.
+We do not want to inspect the state for that, so what option do we have. We can add [*output values*](https://developer.hashicorp.com/terraform/language/values/outputs)  or outputs which we will do in the next section.
 
 ### Adding output to the configuration
 
@@ -130,7 +130,7 @@ Technically they are defined by an `output` block  that similar attributes as va
 
 You can also add a custom validation to the output in the form of a [`precondition`](https://developer.hashicorp.com/terraform/language/values/outputs#custom-condition-checks) to capture e.g., assumptions on the setup.
 
-How ould that look like in our scenario? The ID of the Cloud Foundry organization as well as the URL of the API endpoint are contained in the labels, while the landscape label can be directly fetched from the resource.
+How could that look like in our scenario? The ID of the Cloud Foundry organization as well as the URL of the API endpoint are contained in the labels, while the landscape label can be directly fetched from the resource.
 
 It is good practice to define the outputs in a dedicated file. We therefore add a file called `outputs.tf` to our setup and add the following code to it:
 

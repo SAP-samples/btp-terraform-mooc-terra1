@@ -31,6 +31,8 @@ IdP
 json
 JSON
 jq
+Kyma
+lifecycle
 macOS
 md
 NextSteps
