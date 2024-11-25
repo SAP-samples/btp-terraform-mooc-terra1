@@ -69,7 +69,7 @@ resource "btp_subaccount_environment_instance" "cloudfoundry" {
   name             = local.subaccount_cf_org
   environment_type = "cloudfoundry"
   service_name     = "cloudfoundry"
-  plan_name        = "standard"
+  plan_name        = "trial"
   landscape_label  = terraform_data.cf_landscape_label.output
   parameters = jsonencode({
     instance_name = local.subaccount_cf_org

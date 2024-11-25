@@ -2,7 +2,7 @@
 
 ## Goal 🎯
 
-The goal of this unit is to make add additional resources to out configuration. In addition we will see how to make use of *data sources* and manage *explicit dependencies* between resources.
+The goal of this unit is to add additional resources to out configuration. In addition we will see how to make use of *data sources* and manage *explicit dependencies* between resources.
 
 ## Adding entitlements, subscriptions and service instances 🛠️
 
@@ -64,7 +64,7 @@ terraform validate
 No issues found, then we do the planning
 
 ```bash
-terraform plan -out=unit31.out
+terraform plan -out=unit33.out
 ```
 
 The output should look like this:
@@ -74,7 +74,7 @@ TODO picture
 Three resources to be added, that is what we expected. We can apply the plan via:
 
 ```bash
-terraform apply 'unit31.out'
+terraform apply 'unit33.out'
 ```
 
 The output should look like this:
@@ -188,7 +188,7 @@ terraform validate
 No issues found, then let's plan the change:
 
 ```bash
-terraform plan -out=unit31.out
+terraform plan -out=unit33.out
 ```
 
 This should result in:
@@ -198,7 +198,7 @@ TODO picture
 Looks good, let's apply things then:
 
 ```bash
-terraform apply 'unit31.out'
+terraform apply 'unit33.out'
 ```
 
 We should see an output like this:
@@ -234,7 +234,7 @@ terraform validate
 Then we do the planning:
 
 ```bash
-terraform plan -out=unit31.out
+terraform plan -out=unit33.out
 ```
 
 The result should look like this:
@@ -244,7 +244,7 @@ TODO screenshot
 And with that we apply the change to our subaccount:
 
 ```bash
-terraform apply 'unit31.out'
+terraform apply 'unit33.out'
 ```
 
 The result should look like this:
@@ -257,7 +257,7 @@ What a ride, but we made it. We added entitlements, create a service instance as
 
 We introduced several new resources. Through the course of provisioning these resources we also made use of data sources to fetch information from the SAP BTP and learned about dependency management of Terraform as well as how to define explicit dependencies.
 
-With that let us continue to [Unit 3.4 - Setting up a Cloud Foundry environment via Terraform](../unit_3_4/README.md)
+With that let us continue with [Unit 3.4 - Setting up a Cloud Foundry environment via Terraform](../unit_3_4/README.md)
 
 ## Sample Solution 🛟
 

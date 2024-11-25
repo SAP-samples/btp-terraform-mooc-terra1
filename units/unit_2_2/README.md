@@ -120,7 +120,7 @@ Great! We just created our first subaccount on SAP BTP using Terraform. Time for
 
 We created our first Terraform configuration which provisioned a subaccount on SAP BTP. In the course of this provisioning we walked through a typical Terraform flow.
 
-With that let us continue to [Unit 2.3 - Inspecting the Terraform state](../unit_2_3/README.md)
+With that let us continue with [Unit 2.3 - Inspecting the Terraform state](../unit_2_3/README.md)
 
 ## Sample Solution 🛟
 

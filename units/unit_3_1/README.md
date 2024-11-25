@@ -247,7 +247,7 @@ That is what we wanted to see and our first small refactoring of the configurati
 
 We introduced input variables to our configuration to make the setup more flexible. In addition we added several validations for these variables to avoid wrongly configured subaccounts. Great stuff!
 
-With that let us continue to [Unit 3.2 - Using locals](../unit_3_2/README.md)
+With that let us continue with [Unit 3.2 - Using locals](../unit_3_2/README.md)
 
 ## Sample Solution 🛟
 

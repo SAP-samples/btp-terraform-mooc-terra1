@@ -77,7 +77,7 @@ Now we are fully equipped to inspect the state file via the Terraform CLI
 
 The Terraform state file is one central part of Terraform. The Terraform CLI makes sure that the state file is created and updated and always consistent. To interact with the state file we should use the Terraform CLI. In this unit we saw how to extract information about from the file.
 
-With that let us continue to [Unit 3.1 - Using Variables](../unit_3_1/README.md)
+With that let us continue with [Unit 3.1 - Using Variables](../unit_3_1/README.md)
 
 ## Further References 📝
 
