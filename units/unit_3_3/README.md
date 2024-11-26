@@ -125,7 +125,7 @@ The Terraform provider offers besides the resources also so called [*data source
 Indeed there is a data source that should help us namely [`btp_subaccount_service_plan`](https://registry.terraform.io/providers/SAP/btp/latest/docs/data-sources/subaccount_service_plan) which allows us to read the data for a service plan by plan name and offering name.
 
 > [!TIP]
-> The real-word resources read via data sources do not need to be managed via Terraform. This is alos the reason why the Terraform provider for SAP BTP has data sources for parts of the SAP BTP that cannot be managed via the resources e.g., entitlements on global account level.
+> The real-word resources read via data sources do not need to be managed via Terraform. This is also the reason why the Terraform provider for SAP BTP has data sources for parts of the SAP BTP that cannot be managed via the resources e.g., entitlements on global account level.
 
 With these two ingredients we can implement the configuration by adding the following code to the `main.tf` file:
 

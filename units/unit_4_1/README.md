@@ -59,7 +59,7 @@ variable "cf_api_url" {
 }
 ```
 
-With the basic provider configuration in place, we must add the necessary information for authentication. According to the *Note* section of the provider [documentation](https://registry.terraform.io/providers/cloudfoundry/cloudfoundry/latest/docs#schema) we can provide username and password as environment variables as we already did it for the Terraform provider for SAP BTP dependning on your operating system:
+With the basic provider configuration in place, we must add the necessary information for authentication. According to the *Note* section of the provider [documentation](https://registry.terraform.io/providers/cloudfoundry/cloudfoundry/latest/docs#schema) we can provide username and password as environment variables as we already did it for the Terraform provider for SAP BTP depending on your operating system:
 
 - On Windows:
 
@@ -91,7 +91,7 @@ Having this in place, we can continue and add the resources.
 
 ### Adding a Cloud Foundry space
 
-First we add a Cloud Foundry space. The resource for that is [`cloudfoundry_space`](https://registry.terraform.io/providers/cloudfoundry/cloudfoundry/latest/docs/resources/space). We see that we need at least the ID of the Cloud Foundry organization that we can get from the output of the setup on SAP BTP. We alos must provide a name which should follow the same naming concentions as the organization set up in the provious unit.
+First we add a Cloud Foundry space. The resource for that is [`cloudfoundry_space`](https://registry.terraform.io/providers/cloudfoundry/cloudfoundry/latest/docs/resources/space). We see that we need at least the ID of the Cloud Foundry organization that we can get from the output of the setup on SAP BTP. We also must provide a name which should follow the same naming conventions as the organization set up in the previous unit.
 
 Let's do one step after the other. First we add the necessary variables to the `variables.tf` file:
 
@@ -118,7 +118,7 @@ variable "subaccount_stage" {
 }
 ```
 
-As we will provide them based on the output of the previous setup we create a new file called `terraform.tfvars` and add the values for the Cloud Foundry API URL and the orgnaization ID from the previous unit as values.
+As we will provide them based on the output of the previous setup we create a new file called `terraform.tfvars` and add the values for the Cloud Foundry API URL and the organization ID from the previous unit as values.
 
 > [!TIP]
 > You can use the `terraform output` command to get access to the values.
@@ -192,7 +192,7 @@ resource "cloudfoundry_space_role" "space_developer" {
 }
 ```
 
-Looks like we are done. Let's startthe provisioning.
+Looks like we are done. Let's start the provisioning.
 
 ### Applying the change
 
