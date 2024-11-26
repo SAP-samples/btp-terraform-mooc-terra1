@@ -2,21 +2,21 @@
 
 ## Goal 🎯
 
-The goal of this unit is to enhance the output of our Terraform comnfiguration for a handover of the setup to a development team.
+The goal of this unit is to enhance the output of our Terraform configuration for a handover of the setup to a development team.
 
 ## Making the handover to development smooth 🛠️
 
 ### Motivation
 
-The main purpose of setting up the infrastructure is the enablement of a development team so that the team gets a good starting point and can focus on developing a business application. Probably the development team requested some infratructure for they project and now we have finished the setup and want to inform them that the setup is ready.
+The main purpose of setting up the infrastructure is the enablment of a development team so that the team gets a good starting point and can focus on developing a business application. Probably the development team requested some infrastructure for they project and now we have finished the setup and want to inform them that the setup is ready.
 
-We want to make this as comfortable for the development team as possible, so we want to provide the *URL to the SAP BTP subaccount*, the *URL to the Cloud Foundry space* and the *API endpoint of the Cloud Foundry environment*. This wyy they do not have to find the right places in a SAP BTP global account, but have everything that they need at hand.
+We want to make this as comfortable for the development team as possible, so we want to provide the *URL to the SAP BTP subaccount*, the *URL to the Cloud Foundry space* and the *API endpoint of the Cloud Foundry environment*. This why they do not have to find the right places in a SAP BTP global account, but have everything that they need at hand.
 
 As we already know, we can use output values to surface this information in Terraform and then use this output to transfer it into a ticket, an email or a Microsoft Teams or Slack message.
 
 ### Adding the URL to the subaccount
 
-Let us add the information. We already have the API endpount as part of the output values of the BTP setup. So we need to add the URL of the subaccount. As there is no field that contains this information we must construct it by ourselves. The structure of this URL for our setup on an SAP BTP trial account isis:
+Let us add the information. We already have the API endpoint as part of the output values of the BTP setup. So we need to add the URL of the subaccount. As there is no field that contains this information we must construct it by ourselves. The structure of this URL for our setup on an SAP BTP trial account is:
 
 ```terraform
 https://account.hanatrial.ondemand.com/trial/#/globalaccount/<Global Account ID>/subaccount/<Subaccount ID>
@@ -39,9 +39,9 @@ output "subaccount_url" {
 }
 ```
 
-Here we refenece the two IDs, one from the data source for the global account,  the other one form the resource of the subaccount.
+Here we reference the two IDs, one from the data source for the global account,  the other one form the resource of the subaccount.
 
-That's it. Let's see if it works. We switch to the terminal and makle sure that we ar in the directory `learning-terraform-on-sapbtp`. First of course we do our homework by executing:
+That's it. Let's see if it works. We switch to the terminal and make sure that we are in the directory `learning-terraform-on-sapbtp`. First of course we do our homework by executing:
 
 ```bash
 terraform fmt
@@ -62,7 +62,7 @@ Excellent, we have the URL as output. Let's switch to the Cloud Foundry space
 
 ### Adding the URL to the Cloud Foundry space
 
-The URL to the Cloud Foundry space is constructed in a similar fashon as the URL to the subaccount:
+The URL to the Cloud Foundry space is constructed in a similar fashion as the URL to the subaccount:
 
 ```terraform
 https://account.hanatrial.ondemand.com/trial/#/globalaccount/<Global Account ID>/subaccount/<Subaccount ID>/org/<ORG ID>/space/<Space ID>/applications
@@ -79,7 +79,7 @@ variable "subaccount_url" {
 }
 ```
 
-We do not use that in the configuration *per se* we will refrence it in the definition of the output values. Next we create a new filw called `outputs.tf` in the `cloudfoundry` directory and add the following content:
+We do not use that in the configuration but reference it in the definition of the output values. Next we create a new file called `outputs.tf` in the `cloudfoundry` directory and add the following content:
 
 ```terraform
 output "cf_space_url" {
@@ -110,7 +110,7 @@ Success, we made the information that we would like to hand over to our develope
 
 ## Summary 🪄
 
-To make the onboarding of development teams a smooth experience we added some additonal output values to our configuration. We also leveraged one addditional data source to fetch the informatiom from our global account.
+To make the onboarding of development teams a smooth experience we added some additional output values to our configuration. We also leveraged one additional data source to fetch the information from our global account.
 
 With that let us continue with [Unit 4.3 - Extracting reuseable logic into modules](../unit_4_3 - Handing over to the development team/README.md)
 
