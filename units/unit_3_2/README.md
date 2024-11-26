@@ -15,10 +15,9 @@ Therefore, we have the following requirements for creating a BTP subaccount:
 - the `subaccount domain` should be derived from the `subaccount name` and be unique in our BTP landscape
 - the `beta` flag for our BTP subaccount should only be set, if the stage was not set to `PROD`.
 
-
 ### Building the subaccount name
 
-We want the Terraform script to create subaccounts that should be named according to this pattern: <stage> <project name> (e.g. "DEV interstellar")
+We want the Terraform script to create subaccounts that should be named according to this pattern: <stage> <project name> (e.g. "DEV interstellar").
 
 To achieve this, we will now open the `main.tf` file and add the following section:
 
@@ -31,22 +30,85 @@ locals {
 The section `locals` defines all variables that can be used in the script via the `local.` prefix (instead of the `var.` prefix for the variables defined in the `variables` file).
 The code also shows, how the variable `subaccount_stage` and `project_name` are joined.
 
+Now we need to substitute in the section for the subaccount creation the `var.subaccount_name` with `local.subaccount_name` so that our `main.tf` file looks like this:
+
+```terraform
+locals {
+  subaccount_name      = "${var.subaccount_stage} ${var.project_name}"
+}
+
+resource "btp_subaccount" "project_subaccount" {
+  name         = local.subaccount_name
+  subdomain    = var.subaccount_subdomain
+  region       = var.subaccount_region
+  beta_enabled = var.subaccount_beta_enabled
+  labels = {
+    "stage"      = [var.subaccount_stage]
+    "costcenter" = [var.project_costcenter]
+  }
+}
+```
+
+Now that the `subaccount_name` variable is not needed, and we instead use a `project_name`, we need to adapt our `variables.tf` file accordingly. 
+Let's simpy rename the variable `subaccount_name` to `project_name`:
+
+```terraform
+variable "project_name" {
+  description = "Name of the project"
+  type        = string
+  default     = "Project ABC"
+}
+```
+
 Now let's tackle the creation of the subaccount domain.
 
 ### Creating the subaccount domain
 
-The BTP subaccount domain is a unique name with the BPT landscape in a specific region. To make our BTP subaccount domain unique we will use one Terraform ressource called `random_uuid`. So, let's add at the top 
+The BTP subaccount domain is a unique name with the BPT landscape in a specific region. To make our BTP subaccount domain unique we will use one Terraform resource called `random_uuid`. So, let's add in the `main.tf` file at the top the following line:
 
+```terraform
+resource "random_uuid" "uuid" {}
+```
 
+This will call the Terraform resource `random_uuid` and create a random uuid, that can be used in another local variable for building the subaccount domain.
+
+So, we will add another code line into the locals section to build the `subaccount_domain`.
+
+```terraform
+locals {
+  subaccount_name      = "${var.subaccount_stage} ${var.project_name}"
+  subaccount_subdomain = join("-", [lower(replace("${var.subaccount_stage}-${var.project_name}", " ", "-")), random_uuid.uuid.result])
+}
+```
+
+We use the `join` function, to combine two strings with a `-`. 
+
+The first string takes the `subaccount_stage` and the `project_name` variable that are connected via a `-`. In addition the `replace` function ensures, that all spaces (` `) are replaced with a `-`. As a last part of the first string, the resulting string will be converted with the function `lower` to lower case.
+
+The second string is the result of the `random_uuid.uuid`.
+
+With this improvement, we no longer need to define our unique subaccount domain. Our Terraform script is doing that for us along the requirements we have defined.
+
+Let's quickly replace `var.subaccount_subdomain` with `local.subaccount_subdomain` in the resource section for  `btp_subaccount`.
+
+Now there is one last thing we need to do. 
 
 ### Setting the beta flag of the subaccount
 
+We want the script to setup the beta flag automatically, depending on the stage. We do that in three steps. 
 
-Let's now 
+In the first step we add the following line into the `locals` section of the `main.tf` file.
 
+```terraform
+  beta_enabled         = var.subaccount_stage == "PROD" ? false : true
+```
 
-- the subaccount domain should be unique and be named according to this pattern <stage>-
+This line defines the `beta_enabled` local variable, that is set to `false` if the `subaccount_stage` is `PROD`. For all other stages, it is set to `true`.
 
+Now we replace the respective line for setting up the `beta_enabled` flag with the local variable for `beta_enabled`, so that our `main.tf` file looks like this now:
+
+```terraform
+resource "random_uuid" "uuid" {}
 
 locals {
   subaccount_name      = "${var.subaccount_stage} ${var.project_name}"
@@ -54,16 +116,54 @@ locals {
   beta_enabled         = var.subaccount_stage == "PROD" ? false : true
 }
 
-Therefore, we want to adapt our Terraform scripts accordingly, so that the subaccount name
+resource "btp_subaccount" "project_subaccount" {
+  name         = local.subaccount_name
+  subdomain    = local.subaccount_subdomain
+  region       = var.subaccount_region
+  beta_enabled = local.beta_enabled
+  labels = {
+    "stage"      = [var.subaccount_stage]
+    "costcenter" = [var.project_costcenter]
+  }
+}
+```
 
+Finally, we can now remove the definition of the variable `subaccount_beta_enabled` from our `variables.tf` file, as that variable is no longer needed.
 
+### Applying all our changes
 
+Now that we made the changes, let's see what happens. 
 
-```bash
+As we have introduced a new resource for the `rando_uuid`, we need to run first:
+
+```terraform
+terraform init
+```
+
+Now let's see that happens if we let Terraform plan the changes:
+
+```terraform
 terraform plan
 ```
 
+We see that the subaccount will be deleted and created again, as we have assigned a different subdomain to it.
+
+> [!IMPORTANT]
+> Always the cautios, when the Terraform plan tells you it will detroy something. This can have serious impact on your landscape and may result in loss of important data or services within a subaccount!
+
+As we are sure, that this is what we want, we will now apply the changes:
+
+```terraform
+terraform apply
+```
+
+If you now switch back to your SAP BTP cockpit, checkout the subaccount and you will see, that the `Subdomain` domain was created according to the definition in our locals section.
+The same is true as well for the subaccount name.
+
+
 ## Summary 🪄
+
+Locals are a great way to make your Terraform configuration rock-solid and use them to apply naming conventions to your BTP landscape.
 
 
 ## Sample Solution 🛟
