@@ -50,7 +50,7 @@ resource "btp_subaccount" "project_subaccount" {
 ```
 
 Now that the `subaccount_name` variable is not needed, and we instead use a `project_name`, we need to adapt our `variables.tf` file accordingly. 
-Let's simpy rename the variable `subaccount_name` to `project_name`:
+Let's simply rename the variable `subaccount_name` to `project_name`:
 
 ```terraform
 variable "project_name" {
