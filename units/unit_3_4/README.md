@@ -35,7 +35,7 @@ We added `default = ""` to make the parameter optional. We save the change and s
 ```terraform
 locals {
   ...
-  subaccount_cf_org    = "${var.subaccount_stage}-${var.project_name}"
+  subaccount_cf_org    = lower(replace("${var.subaccount_stage}-${var.project_name}", " ", "-"))
 }
 ```
 

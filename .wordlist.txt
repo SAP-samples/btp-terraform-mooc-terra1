@@ -32,6 +32,7 @@ json
 JSON
 jq
 Kyma
+Kubernetes
 lifecycle
 macOS
 md
@@ -45,6 +46,7 @@ powershell
 README
 readme
 runtime
+runtimes
 reuseable
 spf
 SSO
