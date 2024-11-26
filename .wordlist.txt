@@ -68,6 +68,7 @@ toolchain
 UIs
 UI
 UUID
+uuid
 VS
 YAML
 yaml

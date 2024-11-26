@@ -64,7 +64,7 @@ Now let's tackle the creation of the subaccount domain.
 
 ### Creating the subaccount domain
 
-The BTP subaccount domain is a unique name with the BPT landscape in a specific region. To make our BTP subaccount domain unique we will use one Terraform resource called `random_uuid`. So, let's add in the `main.tf` file at the top the following line:
+The BTP subaccount domain is a unique name with the BTP  landscape in a specific region. To make our BTP subaccount domain unique we will use one Terraform resource called `random_uuid`. So, let's add in the `main.tf` file at the top the following line:
 
 ```terraform
 resource "random_uuid" "uuid" {}
