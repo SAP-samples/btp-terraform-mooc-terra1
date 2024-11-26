@@ -8,7 +8,7 @@ The goal of this unit is to add a *Cloud Foundry* space to the setup as well as 
 
 ### Multi-provider setup
 
-Taking a look at the Terraform provider for SAP BTP, we see that the coverage of the provider is restricted to the SAP BTP resources. This is by intention to keep the responsibility of the provider well-defined. But SAP BTP offers more than pure SAP BTP resources, namely a Cloud Foundry environment with its specific resources as well as a Kyma environment based on Kubernetes. Can we cover the setup of these environments with Terraform. We can, Terraform enables a multi-provder setup enabling us to combine several providers in a configuration.
+Taking a look at the Terraform provider for SAP BTP, we see that the coverage of the provider is restricted to the SAP BTP resources. This is by intention to keep the responsibility of the provider well-defined. But SAP BTP offers more than pure SAP BTP resources, namely a Cloud Foundry environment with its specific resources as well as a Kyma environment based on Kubernetes. Can we cover the setup of these environments with Terraform. We can, Terraform enables a multi-provider setup enabling us to combine several providers in a configuration.
 
 For SAP BTP the following two providers are of relevance for the runtimes:
 
