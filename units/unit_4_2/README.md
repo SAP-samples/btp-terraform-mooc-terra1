@@ -8,7 +8,7 @@ The goal of this unit is to enhance the output of our Terraform configuration fo
 
 ### Motivation
 
-The main purpose of setting up the infrastructure is the enablment of a development team so that the team gets a good starting point and can focus on developing a business application. Probably the development team requested some infrastructure for they project and now we have finished the setup and want to inform them that the setup is ready.
+The main purpose of setting up the infrastructure is the enablement of a development team so that the team gets a good starting point and can focus on developing a business application. Probably the development team requested some infrastructure for they project and now we have finished the setup and want to inform them that the setup is ready.
 
 We want to make this as comfortable for the development team as possible, so we want to provide the *URL to the SAP BTP subaccount*, the *URL to the Cloud Foundry space* and the *API endpoint of the Cloud Foundry environment*. This why they do not have to find the right places in a SAP BTP global account, but have everything that they need at hand.
 
