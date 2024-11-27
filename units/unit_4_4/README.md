@@ -2,13 +2,13 @@
 
 ## Goal 🎯
 
-The goal of this lesson is to add emergency admins to the subacount by assigning the corresponding role collection. In addition we will learn how Terraform can help us to keep the code DRY ("Don't repeat yourself") by leveraging meta arguments of the `resource` block.
+The goal of this lesson is to add emergency admins to the subaccount by assigning the corresponding role collection. In addition we will learn how Terraform can help us to keep the code DRY ("Don't repeat yourself") by leveraging meta arguments of the `resource` block.
 
 ## Using meta arguments for iterations 🛠️
 
 ### Basics about meta arguments
 
-The requirement we want to cover in this lesson is that whenever a subaccount is created two emergency administrators should be added to the subaccount. This translates to assigning the role collection `Subaccount Administrator` to the users. This can be done via the resource [`btp_subaccount_role_collection_assignment`](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_role_collection_assignment). As we want to assign two users we must add this resouce two times.
+The requirement we want to cover in this lesson is that whenever a subaccount is created two emergency administrators should be added to the subaccount. This translates to assigning the role collection `Subaccount Administrator` to the users. This can be done via the resource [`btp_subaccount_role_collection_assignment`](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_role_collection_assignment). As we want to assign two users we must add this resource two times.
 
 > [!NOTE]
 > In general, the direct assignment of user to role collections is not considered a recomended practise as this makes the lifecacle managament especially the off-boarding flow cumbersome. We recommend to check the recommended practises of the SAP Cloud Identity Service for a sustainable setup. However, for the sake of this lesson we accept this setup.
@@ -22,7 +22,7 @@ That looks a bit fishy. Isn't there a better approach to this like providing a l
 
 The part of the variable works as we can define complex types like lists, sets etc. (see documentation for [literal expressions](https://developer.hashicorp.com/terraform/language/expressions/types#literal-expressions)). It would be a surprise if there isn't a way in Terraform to then iterate over this list.
 
-And indeed there is. We can use the meta argument [`for_each`](https://developer.hashicorp.com/terraform/language/meta-arguments/for_each) to a resource which iterates over a set or a map. In detail it executes the iteration and for each entry it creates a so called `each` object that consits of a `key` and a `value`. This should help us in fulfilling the requirement. Let's adjust our configuration.
+And indeed there is. We can use the meta argument [`for_each`](https://developer.hashicorp.com/terraform/language/meta-arguments/for_each) to a resource which iterates over a set or a map. In detail it executes the iteration and for each entry it creates a so called `each` object that consists of a `key` and a `value`. This should help us in fulfilling the requirement. Let's adjust our configuration.
 
 ### Adding the emergency administrators to the configuration
 
@@ -33,11 +33,13 @@ variable "subaccount_emergency_admins" {
   type        = list(string)
   description = "List of emergency admins for the SAP BTP subaccount"
   default     = []
-  sensitive   = true
 }
 ```
 
-This new variable is a list of strings that contains the usernames of the emergency administrators. We default it to an empty list `[]` to make it an optional variable. As thsi is sensitive information, we set `sensitive` to `true`.
+This new variable is a list of strings that contains the usernames of the emergency administrators. We default it to an empty list `[]` to make it an optional variable.
+
+> [!INFO]
+> As we want to use the list via `for_each` we cannot set the `sensitive` attribute. Reason is that the sensitive value could be exposed as a resource instance key.
 
 Next we add the values that we want to provide in the `terraform.tfvars` file using dummy values as usernames:
 
@@ -103,7 +105,7 @@ Interesting. The `each.key` was set to the index of the list. Good to know.
 > [!TIP]
 > There is also another meta argument that is worth a look when it comes to creating multiple instances namely the [`count`](https://developer.hashicorp.com/terraform/language/meta-arguments/count).
 
-Mission accomplished, we added the new adminstrators.
+Mission accomplished, we added the new administrators.
 
 ## Summary 🪄
 
