@@ -64,6 +64,7 @@ Terraform
 Terraform's
 terraform
 Terraform's
+Terraforming
 tf
 TODO
 toolchain
