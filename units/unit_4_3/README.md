@@ -2,7 +2,7 @@
 
 ## Goal 🎯
 
-The goal of this unit is to make the code better maintanable and re-usable by moving some of our code into modules.
+The goal of this unit is to make the code better maintainable and re-usable by moving some of our code into modules.
 
 ## Refactoring with modules 🛠️
 
@@ -11,7 +11,7 @@ For that we  will move out some of out code into a module.
 
 According to the [official Terraform documentations for modules](https://developer.hashicorp.com/terraform/language/modules): "*Modules are containers for multiple resources that are used together. A module consists of a collection of .tf and/or .tf.json files kept together in a directory. Modules are the main way to package and reuse resource configurations with Terraform.*".
 
-And we will take advantage of this concept by moving all of the code into a module that contains a baseline with those BTP services we want to habe in subaccounts. 
+And we will take advantage of this concept by moving all of the code into a module that contains a baseline with those BTP services we want to have in subaccounts. 
 
 We will do this in three steps:
 - create a module folder and move the code to that folder which takes care of the app/service entitlements, service instances and app subscriptions.
@@ -128,7 +128,7 @@ That was a big piece of work here. Now let's tackle the next step.
 
 ### Create a variables file for the module
 
-To make the module selfcontained, we need to provide it with those variables, that it needs to work. 
+To make the module self contained, we need to provide it with those variables, that it needs to work. 
 
 To accomplish this, take the following code and paste it into the `srvc-baseline_variables.tf` file (and save it), that we created before:
 
@@ -175,9 +175,9 @@ module "srvc_baseline" {
 The `module` section has the name `srvc_baseline`, that you can use to work with it later on if needed.
 The `source` attribute tells Terraform where to find the module.
 
-And after the that we see the three variables `subaccount_id`, `project_name` and `project_stage` that we have defined before in our module. These variables aree assigned with the variables that are known to the `main.tf` file.
+And after the that we see the three variables `subaccount_id`, `project_name` and `project_stage` that we have defined before in our module. These variables are assigned with the variables that are known to the `main.tf` file.
 
-So, you might be askign yourself, whether the code would be working now immediately. But that won't happen. Why?
+So, you might be asking yourself, whether the code would be working now immediately. But that won't happen. Why?
 
 By creating the module, the state file would no longer be able to tell what was changed.
 
@@ -186,7 +186,7 @@ Show terraform plan??
 
 Therefore, there is one last step we need to make, so that the state file knows what we've changed.
 
-## Esure that our state information remains stable
+## Ensure that our state information remains stable
 
 To tell our state that we have moved certain assets in our code, we need to create a `moved.tf` file in the same folder like the `main.tf` file.
 
