@@ -15,7 +15,7 @@ For SAP BTP the following two providers are of relevance for the runtimes:
 - [The Terraform provider for Cloud Foundry](https://registry.terraform.io/providers/cloudfoundry/cloudfoundry/latest) provided by the Cloud Foundry Foundation
 - [The Terraform provider for Kubernetes](https://registry.terraform.io/providers/hashicorp/kubernetes/latest) provided by Hashicorp
 
-As we create a Cloud Foundry environment in the previous unit, we will focus on the Cloud Foundry provider in this course.
+As we created a Cloud Foundry environment in the previous unit, we will focus on the Cloud Foundry provider in this course.
 
 As we are starting from scratch, the first thing we need to do is set up the provider configuration.
 

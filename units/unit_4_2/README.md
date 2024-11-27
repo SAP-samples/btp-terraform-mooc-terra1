@@ -112,7 +112,7 @@ Success, we made the information that we would like to hand over to our develope
 
 To make the onboarding of development teams a smooth experience we added some additional output values to our configuration. We also leveraged one additional data source to fetch the information from our global account.
 
-With that let us continue with [Unit 4.3 - Extracting reuseable logic into modules](../unit_4_3 - Handing over to the development team/README.md)
+With that let us continue with [Unit 4.3 - Extracting reuseable logic into modules](../unit_4_3/README.md)
 
 ## Sample Solution 🛟
 
