@@ -226,7 +226,7 @@ TODO picture
 Looks as expected, let's apply the change then:
 
 ```bash
-terraform plan 'unit34.out'
+terraform apply 'unit34.out'
 ```
 
 The result should look like this:

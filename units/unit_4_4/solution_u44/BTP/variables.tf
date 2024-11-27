@@ -49,4 +49,5 @@ variable "subaccount_emergency_admins" {
   type        = list(string)
   description = "List of emergency admins for the SAP BTP subaccount"
   default     = []
+  sensitive   = true
 }
