@@ -21,7 +21,7 @@ We will do this in three steps:
 
 ### Creating a module folder for the service baseline
 
-In a first step we create a folder `modules` and a subfolder called `srvc-baseline`.
+In a first step we create a folder `modules` and a sub folder called `srvc-baseline`.
 
 In the `srvc-baseline` we create two new files:
 - `srvc-baseline_variables.tf`: this file will create the variables for our module
