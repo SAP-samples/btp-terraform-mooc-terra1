@@ -47,7 +47,7 @@ We provide two variants of the dev container configuration.
 
 If you want to use the one called `Terraform devcontainer - with env file` you must first execute the steps described in the following section, otherwise directly jump to section [Starting the dev container](#starting-the-dev-container).
 
-### Creating the devcontianer.env file
+### Creating the devcontainer.env file
 
 Open the cloned repository and create a new file called `devcontainer.env` file in the `.devcontainer/` directory (**not** the `.devcontainer/with_env_file/` directory), with the following environment variables:
 
@@ -62,7 +62,7 @@ Save the file and proceed with starting the dev container as described in the fo
 
 ### Starting the dev container
 
-To (re)open the cloned directory in the dev container execute the folowing steps:
+To (re)open the cloned directory in the dev container execute the following steps:
 
 1. Open the command palette in Visual Studio Code:
 
@@ -122,7 +122,7 @@ You can install the required tools locally on your machine. The following tools 
 
 ## Cleanup SAP BTP Account
 
-We are going to provision several resources like entitlements and subscriptions through the course of this course. As we are working in a trial account there might be limitations e.g., concering the available quotas.
+We are going to provision several resources like entitlements and subscriptions through the course of this course. As we are working in a trial account there might be limitations e.g., concerning the available quotas.
 
 It is therefore recommended to create a new trial account and delete the already existing subaccount from the global account, so that you start from an *empty* global account
 

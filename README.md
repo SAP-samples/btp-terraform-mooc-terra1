@@ -11,7 +11,7 @@ This repository contains the code samples used throughout the course "Getting St
 
 ## Prerequisites
 
-There are some requirements you must fulfill before being able to start with the coding exercises using the Terraform provider for SAP BTP. The prerequistes are:
+There are some requirements you must fulfill before being able to start with the coding exercises using the Terraform provider for SAP BTP. The prerequisites are:
 
 - You have an SAP BTP Trial Account. If you don't have one yet, you can get one [here](https://developers.sap.com/tutorials/hcp-create-trial-account.html).
 - Make sure that your SAP Universal ID is configured correctly. You can find the instructions in [SAP Note 3085908](https://me.sap.com/notes/3085908).

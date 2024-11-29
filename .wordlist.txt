@@ -10,12 +10,16 @@ CLA
 CLI
 CodeQL
 Codespace
+Codespaces
 config
 Copilot
 customizations
+dev
+Dev
 DEV
 DCO
 enablement
+env
 dependabot
 devcontainer
 dir
