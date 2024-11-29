@@ -2,7 +2,7 @@
 
 ## Goal 🎯
 
-The goal of this unit is to make the code better maintainable and re-usable by moving some of our code into modules.
+The goal of this unit is to make the code better maintainable and re-usable by moving some of our code into *modules*.
 
 ## Refactoring with modules 🛠️
 
@@ -27,7 +27,7 @@ We will do this in three steps:
 
 In a first step we create a directory called `modules` and a sub sub-directory called `srvc-baseline`.
 
-In the `srvc-baseline` we create two new files:
+In the directory `srvc-baseline` we create two files:
 - `srvc-baseline_variables.tf`: this file will create the variables for our module
 - `srvc-baseline.tf`: this file contains the main script of the module
 
@@ -73,12 +73,9 @@ resource "btp_subaccount_subscription" "feature_flags_dashboard_app" {
 }
 ```
 
-Now please delete the section in the `main.tf` file (and save the changes) that we just copied over to the `srvc-baseline.tf` file in the directory `modules/srvc-baseline`.
+Now we delete the section in the `main.tf` file that we copied over to the `srvc-baseline.tf` file in the directory `modules/srvc-baseline`.
 
-> [!IMPORTANT]
-> Please don't forget to delete the code in `main.tf` that you have copied over!
-
-As the module is a self-contained asset, we need to ensure that it contains all information needed, to be executed. Therefore, we will have to add a section for the provider information as well. For that, please add the following lines into the `srvc-baseline.tf` file:
+A module can define constraints concerning the required configuration that the Terraform configuration (also known as *calling* module) mus provide. Therefore, we add a section for the provider that we expect to be initialized. For that, we add the following lines into the `srvc-baseline.tf` file:
 
 ```terraform
 terraform {
@@ -89,10 +86,11 @@ terraform {
   }
 }
 ```
-> [!TIP]
-> We could have created a separate provider.tf for that purpose as well within the directory. But as we don't have to provide the provider configuration, we can at it to the `srvc-baseline.tf` file. The provider configuration in the module is then taken from the one of the root module.
 
-Now we have to move the definition of the local variable `service_name_prefix` from the  `main.tf` file to the `srvc-baseline.tf` file, so that the file looks like this:
+> [!TIP]
+> We could have created a separate provider.tf for that purpose as well within the directory. But as we don't have to provide the provider configuration, we can at it to the `srvc-baseline.tf` file. The provider configuration is taken calling module.
+
+Now we must move the definition of the local variable `service_name_prefix` from the  `main.tf` file to the `srvc-baseline.tf` file, so that the file looks like this:
 
 ```terraform
 terraform {
@@ -112,12 +110,9 @@ resource "btp_subaccount_entitlement" "alert_notification_service_standard" {
   service_name  = "alert-notification"
   plan_name     = "standard"
 }
-...
-...
-...
 ```
 
-Please delete the `service_name_prefix` variable from the `main.tf` file, so that the `locals` section in the `main.tf` file looks like this:
+Delete the `service_name_prefix` local value from the `main.tf` file. The `locals` section in the `main.tf` file then looks like this:
 
 ```terraform
 locals {
@@ -128,13 +123,13 @@ locals {
 }
 ```
 
-That was a big piece of work here. Now let's tackle the next step.
+That was a big piece of work here but we are not done yet. Let's tackle the next step.
 
 ### Create a variables file for the module
 
-To make the module self contained, we need to provide it with those variables, that it needs to work.
+A module can be compared to a library or a function that we reuse. In analogy to that we must define the input that the caller must provide and that we need in our configuration.
 
-To accomplish this, take the following code and paste it into the `srvc-baseline_variables.tf` file (and save it), that we created before:
+To accomplish this, we take the following code and paste it into the `srvc-baseline_variables.tf` file, that we created before:
 
 ```terraform
 variable "subaccount_id" {
@@ -165,7 +160,7 @@ Our work in the module is done. Now we need to call the module from our `main.tf
 
 ### Integrating the module into our code
 
-To call our module that will handle the entitlements and provisioning of our BTP services and apps, please add this section into the `main.tf` file:
+To call our module that will handle the entitlements and provisioning of our BTP services and apps, we add the following section to the `main.tf`:
 
 ```terraform
 module "srvc_baseline" {
@@ -176,23 +171,25 @@ module "srvc_baseline" {
 }
 ```
 
-The `module` section has the name `srvc_baseline`, that you can use to work with it later on if needed.
-The `source` attribute tells Terraform where to find the module.
+The setup comprises the following parts:
 
-And after the that we see the three variables `subaccount_id`, `project_name` and `project_stage` that we have defined before in our module. These variables are assigned with the variables that are known to the `main.tf` file.
+- the `module` block has the name `srvc_baseline`, that you can use to work with it later on if needed.
+- The `source` attribute tells Terraform where to find the module. in this case in the local file system.
+- In addition we see the three variables `subaccount_id`, `project_name` and `project_stage` that we have defined before in our module. These variables are assigned with the variables that are known to the `main.tf` file.
 
 So, you might be asking yourself, whether the code would be working now immediately. But that won't happen. Why?
 
-By creating the module, the state file would no longer be able to tell what was changed.
+By moving resources from the `main.tf` file to the module, the state file would no longer be able to tell where the resources it created before are located now.
 
-TODO:
-Show terraform plan??
+We can see this be executing the `terraform plan` command:
 
-Therefore, there is one last step we need to make, so that the state file knows what we've changed.
+TODO picture
+
+Therefore, there is one last adjustemt we need to make, so that the state file knows what we've changed and how the new addresses of the already created resources look like.
 
 ## Ensure that our state information remains stable
 
-To tell our state that we have moved certain assets in our code, we need to create a so called [`moved` block](https://developer.hashicorp.com/terraform/language/moved) that instructs Terraform how to handle the moved resources when a state refresh happens. For that we create a new file called `moved.tf` in the same directory as the `main.tf` file.
+To tell our state that we have moved certain assets in our code, we need to create so called [`moved` blocks](https://developer.hashicorp.com/terraform/language/moved). These blocks instruct Terraform how to handle the moved resources when a state refresh happens. For that we create a new file called `moved.tf` in the same directory as the `main.tf` file.
 
 We copy the following code into the file:
 
@@ -224,11 +221,11 @@ moved {
 }
 ```
 
-You can see that we are listing up all the resources that we have moved from the `main.tf` to the module `srvc_baseline` and re-route their address in the state file.
+You can see that we are listing up all the resources that we have moved from the `main.tf` to the module `srvc_baseline` and re-route their address so that the state file gets get updated accordingly.
 
 ### Test our code
 
-Done. Let's see if things still work. Let's switch to our directory `learning-terraform-on-sapbtp/BTP` and run these steps:
+Now let's see if things still work. Let's switch to the directory `learning-terraform-on-sapbtp/BTP` and do our homework first:
 
 ```bash
 terraform fmt
@@ -256,7 +253,6 @@ With that let us continue with [Unit 4 Lesson 4 - Iterating over lists in Terraf
 ## Sample Solution 🛟
 
 You find the sample solution in the directory `units/unit_4/lesson_3/solution_u4_l3`.
-
 
 ## Further References 📝
 
