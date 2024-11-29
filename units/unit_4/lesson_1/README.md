@@ -1,4 +1,4 @@
-# Unit 4.1 - Moving to a multi-provider setup
+# Unit 4 Lesson 1 - Moving to a multi-provider setup
 
 ## Goal 🎯
 
@@ -33,7 +33,14 @@ However there is one downside of the provider configuration that comes into our 
 > [!NOTE]
 > This downside is not specific for the setup on SAP BTP, but is also the case for other cloud providers. In the case of Kubernetes it is even recommended to split the provisioning of the cluster from further action in the cluster to avoid unwanted side effects.
 
-To separate the Terraform configuration for Cloud Foundry, we create a new directory called `cloudfoundry`. We create a new file called `provider.tf` in the newly created directory with the following content:
+To separate the Terraform configuration for Cloud Foundry, we restructure our setup a bit. We create two new directories inside of our existing directory `learning-terraform-on-sapbtp`:
+
+- `BTP` - This directory will contain all the configuration for *BTP specific* resources
+- `CloudFoundry` - This directory will contain all the configuration for *Cloud Foundry specific* resources
+
+We move all the configuration inlcuding the `*.tfstate` file as well as the `.terraform` directory and the `.terraform.lock.hcl` file into the `BTP` directory. The directory `learning-terraform-on-sapbtp` should now only contain the two new directories.
+
+We switch into the directory `CloudFoundry`. We create a new file called `provider.tf` in the newly created directory with the following content:
 
 ```terraform
 terraform {
@@ -196,7 +203,7 @@ Looks like we are done. Let's start the provisioning.
 
 ### Applying the change
 
-As we have setup a new directory with a new provider, we must initialize this directory first. We navigate into the new directory `cloudfoundry` execute the following command:
+As we have setup a new directory with a new provider, we must initialize this directory first. We navigate into the new directory `CloudFoundry` execute the following command:
 
 ```bash
 terraform init
@@ -239,11 +246,11 @@ Great, we created a new space in the Cloud Foundry organization and added us as 
 
 We added a new Terraform setup to manage Cloud Foundry specific resources. We created the provider configuration and created a setup comprising a space as well as assigning us some roles in this space.
 
-With that let us continue with [Unit 4.2 - ](../unit_4_2 - Handing over to the development team/README.md)
+With that let us continue with [Unit 4 Lesson 2 - Handing over to the development team](../lesson_2/README.md)
 
 ## Sample Solution 🛟
 
-You find the sample solution in the folder `units/unit_4_1/solution_u41`.
+You find the sample solution in the directory `units/unit_4/lesson_1/solution_u4_l1`.
 
 ## Further References 📝
 

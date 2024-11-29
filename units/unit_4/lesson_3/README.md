@@ -1,4 +1,4 @@
-# Unit 4.3 - Extracting reuseable logic into modules
+# Unit 4 Lesson 3 - Extracting reuseable logic into modules
 
 ## Goal 🎯
 
@@ -7,21 +7,25 @@ The goal of this unit is to make the code better maintainable and re-usable by m
 ## Refactoring with modules 🛠️
 
 Our project code has grown and we want to re-factor it, so that we can better re-use and maintain the code.
+
+> [!NOTE]
+> You find more information about refactoring Terraform code in the [official documentation](https://developer.hashicorp.com/terraform/language/modules/develop/refactoring).
+
 For that we  will move out some of out code into a module.
 
 According to the [official Terraform documentations for modules](https://developer.hashicorp.com/terraform/language/modules): "*Modules are containers for multiple resources that are used together. A module consists of a collection of .tf and/or .tf.json files kept together in a directory. Modules are the main way to package and reuse resource configurations with Terraform.*".
 
-And we will take advantage of this concept by moving all of the code into a module that contains a baseline with those BTP services we want to have in subaccounts. 
+And we will take advantage of this concept by moving all of the code into a module that contains a baseline with those BTP services we want to have in subaccounts.
 
 We will do this in three steps:
-- create a module folder and move the code to that folder which takes care of the app/service entitlements, service instances and app subscriptions.
+- create a module directory and move the code to that directory which takes care of the app/service entitlements, service instances and app subscriptions.
 - create a set of variables in that module to trigger the provisioning of the services/apps in the module
 - change the `main.tf` file to call the module
 - ensure that our state information remains stable after the changes
 
-### Creating a module folder for the service baseline
+### Creating a module directory for the service baseline
 
-In a first step we create a folder `modules` and a sub folder called `srvc-baseline`.
+In a first step we create a directory called `modules` and a sub sub-directory called `srvc-baseline`.
 
 In the `srvc-baseline` we create two new files:
 - `srvc-baseline_variables.tf`: this file will create the variables for our module
@@ -69,7 +73,7 @@ resource "btp_subaccount_subscription" "feature_flags_dashboard_app" {
 }
 ```
 
-Now please delete the section in the `main.tf` file (and save the changes) that we just copied over to the `srvc-baseline.tf` file in the `modules/srvc-baseline` folder.
+Now please delete the section in the `main.tf` file (and save the changes) that we just copied over to the `srvc-baseline.tf` file in the directory `modules/srvc-baseline`.
 
 > [!IMPORTANT]
 > Please don't forget to delete the code in `main.tf` that you have copied over!
@@ -86,7 +90,7 @@ terraform {
 }
 ```
 > [!TIP]
-> We could have created a separate provider.tf for that purpose as well within the folder. But as we don't have to provide the provider configuration (this is something we already do in our main terraform script), we can at it to the `srvc-baseline.tf` file.
+> We could have created a separate provider.tf for that purpose as well within the directory. But as we don't have to provide the provider configuration, we can at it to the `srvc-baseline.tf` file. The provider configuration in the module is then taken from the one of the root module.
 
 Now we have to move the definition of the local variable `service_name_prefix` from the  `main.tf` file to the `srvc-baseline.tf` file, so that the file looks like this:
 
@@ -128,7 +132,7 @@ That was a big piece of work here. Now let's tackle the next step.
 
 ### Create a variables file for the module
 
-To make the module self contained, we need to provide it with those variables, that it needs to work. 
+To make the module self contained, we need to provide it with those variables, that it needs to work.
 
 To accomplish this, take the following code and paste it into the `srvc-baseline_variables.tf` file (and save it), that we created before:
 
@@ -188,9 +192,9 @@ Therefore, there is one last step we need to make, so that the state file knows 
 
 ## Ensure that our state information remains stable
 
-To tell our state that we have moved certain assets in our code, we need to create a `moved.tf` file in the same folder like the `main.tf` file.
+To tell our state that we have moved certain assets in our code, we need to create a so called [`moved` block](https://developer.hashicorp.com/terraform/language/moved) that instructs Terraform how to handle the moved resources whan a state refresh happens. For that we create a new file called `moved.tf` in the same directory as the `main.tf` file.
 
-Into that file please copy the following code:
+We copy the following code into the file:
 
 ```terraform
 moved {
@@ -220,13 +224,11 @@ moved {
 }
 ```
 
-You can see that we are listing up all the resources that we have moved from the `main.tf` to the module `srvc_baseline`.
-
-With this information the state information won't break as we are telling that we have moved certain resources to a different place.
+You can see that we are listing up all the resources that we have moved from the `main.tf` to the module `srvc_baseline` and re-route their address in the state file.
 
 ### Test our code
 
-Done. Let's see if things still work. Let's switch to our `learning-terraform-on-sapbtp` folder and run these steps:
+Done. Let's see if things still work. Let's switch to our directory `learning-terraform-on-sapbtp/BTP` and run these steps:
 
 ```bash
 terraform fmt
@@ -247,35 +249,17 @@ Success, we successfully restructured our code and have now a re-usable module t
 
 ## Summary 🪄
 
-You have learned now the concept of modules to encapsulate reusable configurations. 
+You have learned now the concept of modules to extract reusable configurations. In additon we also realigned the state of the setup after refactoring the configuration via `moved` blocks.
+
+With that let us continue with [Unit 4 Lesson 4 - Iterating over lists in Terraform](../lesson_4/README.md)
 
 ## Sample Solution 🛟
 
-You find the sample solution in the folder `units/unit_4_3/solution_u43`.
+You find the sample solution in the directory `units/unit_4/lesson_3/solution_u4_l3`.
+
 
 ## Further References 📝
 
-## Outline (to be deleted)
-
-- Extract Entitlements, service instance creation and app subscription into a module
-- Use module in `main.tf`
-- Add `moved` block (just copy&paste)
-- Execute terraform get and terraform apply to execute move in state
-
-
-More info on refactoring: https://developer.hashicorp.com/terraform/language/modules/develop/refactoring
-
-> [!NOTE]
-> Highlights information that users should take into account, even when skimming.
-
-> [!TIP]
-> Optional information to help a user be more successful.
-
-> [!IMPORTANT]
-> Crucial information necessary for users to succeed.
-
-> [!WARNING]
-> Critical content demanding immediate user attention due to potential risks.
-
-> [!CAUTION]
-> Negative potential consequences of an action.
+- [Reafctoring](https://developer.hashicorp.com/terraform/language/modules/develop/refactoring)
+- [Modules](https://developer.hashicorp.com/terraform/language/modules)
+- [`moved` block](https://developer.hashicorp.com/terraform/language/moved)

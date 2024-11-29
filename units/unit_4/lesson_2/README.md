@@ -1,4 +1,4 @@
-# Unit 4.2 - Handing over to the development team
+# Unit 4 Lesson 2 - Handing over to the development team
 
 ## Goal 🎯
 
@@ -24,13 +24,13 @@ https://account.hanatrial.ondemand.com/trial/#/globalaccount/<Global Account ID>
 
 We already have the ID of the subaccount. but we do not yet have the ID of the global account. Luckily there is a data source that we can use to get this information namely the [`btp_globalaccount`](https://registry.terraform.io/providers/SAP/btp/latest/docs/data-sources/globalaccount). We know what we have to do right?
 
-Let us first add this data source to the `main.tf` file in the directory `learning-terraform-on-sapbtp`. We put it right at the beginning of the file in front of the `locals` block:
+Let us first add this data source to the `main.tf` file in the directory `learning-terraform-on-sapbtp/BTP`. We put it right at the beginning of the file in front of the `locals` block:
 
 ```terraform
 data "btp_globalaccount" "this" {}
 ```
 
-Next we add a new output value to the `outputs.tf` in the directory `learning-terraform-on-sapbtp`:
+Next we add a new output value to the `outputs.tf` in the directory `learning-terraform-on-sapbtp/BTP`:
 
 ```terraform
 output "subaccount_url" {
@@ -41,7 +41,7 @@ output "subaccount_url" {
 
 Here we reference the two IDs, one from the data source for the global account,  the other one form the resource of the subaccount.
 
-That's it. Let's see if it works. We switch to the terminal and make sure that we are in the directory `learning-terraform-on-sapbtp`. First of course we do our homework by executing:
+That's it. Let's see if it works. We switch to the terminal and make sure that we are in the directory `learning-terraform-on-sapbtp/BTP`. First of course we do our homework by executing:
 
 ```bash
 terraform fmt
@@ -70,7 +70,7 @@ https://account.hanatrial.ondemand.com/trial/#/globalaccount/<Global Account ID>
 
 The first part is the same as for the subaccount, we just need to add the ID of the organization as well as the ID of the space. We have that at hand namely via the variable `cf_org_id` or as information from the resource `cloudfoundry_space`.
 
-To get the first part of the URL that we already constructed we decide to use the output value of the previous step as input for the cloud foundry setup. For that we add a variable to the `variables.tf` in the `cloudfoundry` directory:
+To get the first part of the URL that we already constructed we decide to use the output value of the previous step as input for the cloud foundry setup. For that we add a variable to the `variables.tf` in the `CloudFoundry` directory:
 
 ```terraform
 variable "subaccount_url" {
@@ -79,7 +79,7 @@ variable "subaccount_url" {
 }
 ```
 
-We do not use that in the configuration but reference it in the definition of the output values. Next we create a new file called `outputs.tf` in the `cloudfoundry` directory and add the following content:
+We do not use that in the configuration but reference it in the definition of the output values. Next we create a new file called `outputs.tf` in the `CloudFoundry` directory and add the following content:
 
 ```terraform
 output "cf_space_url" {
@@ -89,7 +89,7 @@ output "cf_space_url" {
 ```
 We construct the URL by combining the variable `subaccount_url` and filling in the blanks for the ID of the organization using the variable `cf_org_id` and the ID of the space via the corresponding field of the resource `cloudfoundry_space`.
 
-Done. As for the SAP BTP part, let's see if thing work. We switch to the directory `cloudfoundry` and do our homework:
+Done. As for the SAP BTP part, let's see if thing work. We switch to the directory `CloudFoundry` and do our homework:
 
 ```bash
 terraform fmt
@@ -112,8 +112,8 @@ Success, we made the information that we would like to hand over to our develope
 
 To make the onboarding of development teams a smooth experience we added some additional output values to our configuration. We also leveraged one additional data source to fetch the information from our global account.
 
-With that let us continue with [Unit 4.3 - Extracting reuseable logic into modules](../unit_4_3/README.md)
+With that let us continue with [Unit 4 Lesson 3 - Extracting reuseable logic into modules](../lesson_3/README.md)
 
 ## Sample Solution 🛟
 
-You find the sample solution in the folder `units/unit_4_2/solution_u42`.
+You find the sample solution in the directory `units/unit_4/lesson_2/solution_u4_l2`.

@@ -1,4 +1,4 @@
-# Unit 3.3 - Adding additional resources to the Terraform Configuration
+# Unit 3 Lesson 3 - Adding additional resources to the Terraform Configuration
 
 ## Goal 🎯
 
@@ -257,11 +257,11 @@ What a ride, but we made it. We added entitlements, create a service instance as
 
 We introduced several new resources. Through the course of provisioning these resources we also made use of data sources to fetch information from the SAP BTP and learned about dependency management of Terraform as well as how to define explicit dependencies.
 
-With that let us continue with [Unit 3.4 - Setting up a Cloud Foundry environment via Terraform](../unit_3_4/README.md)
+With that let us continue with [Unit 3 Lesson 4 - Setting up a Cloud Foundry environment via Terraform](../lesson_4/README.md)
 
 ## Sample Solution 🛟
 
-You find the sample solution in the folder `units/unit_3_3/solution_u33`.
+You find the sample solution in the directory `units/unit_3/lesson_3/solution_u3_l3`.
 
 ## Further References 📝
 

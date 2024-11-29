@@ -1,4 +1,4 @@
-# Unit 2.2 - Applying the Terraform setup to SAP BTP
+# Unit 2 Lesson 2 - Applying the Terraform setup to SAP BTP
 
 ## Goal 🎯
 
@@ -120,11 +120,11 @@ Great! We just created our first subaccount on SAP BTP using Terraform. Time for
 
 We created our first Terraform configuration which provisioned a subaccount on SAP BTP. In the course of this provisioning we walked through a typical Terraform flow.
 
-With that let us continue with [Unit 2.3 - Inspecting the Terraform state](../unit_2_3/README.md)
+With that let us continue with [Unit 2 Lesson 3 - Inspecting the Terraform state](../lesson_3/README.md)
 
 ## Sample Solution 🛟
 
-You find the sample solution in the folder `units/unit_2_2/solution_u22`.
+You find the sample solution in the directory `units/unit_2/lesson_2/solution_u2_l2`.
 
 ## Further References 📝
 

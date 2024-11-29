@@ -1,4 +1,4 @@
-# Unit 2.3 - Inspecting the Terraform state
+# Unit 2 Lesson 3 - Inspecting the Terraform state
 
 ## Goal 🎯
 
@@ -30,7 +30,7 @@ The state file is stored in a human-readable format i.e., as JSON file. You can 
 > The state can contain sensitive data, that is stored in unencrypted in the JSON file of the state. Hence, for productive usage you must make sure that the state file is encrypted.
 
 However, you should *never* edit the state file via the editor. This could lead to a corrupted state file which needs to be fixed before any further action via Terraform can take place.
-But how should we interact then with this file? The answer is: via the Terraform CLI. The CLI offers several commands to read the data from the state as well as to modify data in the state. 
+But how should we interact then with this file? The answer is: via the Terraform CLI. The CLI offers several commands to read the data from the state as well as to modify data in the state.
 
 In this tutorial we will focus on the reading part.
 
@@ -79,7 +79,7 @@ Now we are fully equipped to inspect the state file via the Terraform CLI
 
 The Terraform state file is one central part of Terraform. The Terraform CLI makes sure that the state file is created and updated and always consistent. To interact with the state file we should use the Terraform CLI. In this unit we saw how to extract information about from the file.
 
-With that let us continue with [Unit 3.1 - Using Variables](../unit_3_1/README.md)
+With that let us continue with [Unit 3 Lesson 1 - Using Variables](../../unit_3/lesson_1/README.md)
 
 ## Further References 📝
 

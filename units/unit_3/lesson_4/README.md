@@ -1,4 +1,4 @@
-# Unit 3.4 - Setting up a Cloud Foundry environment via Terraform
+# Unit 3 Lesson 4 - Setting up a Cloud Foundry environment via Terraform
 
 ## Goal 🎯
 
@@ -194,11 +194,11 @@ It was a bit more work than we expected, but here we are having a Cloud Foundry 
 
 We added a Cloud Foundry environment to our setup. In the course of providing the environment we learned how to fetch and store environment-specific information in accordance to the Terraform lifecycle. In addition, we learned how to add explicit output values to our configuration.
 
-With that let us continue with [Unit 4.1 - Moving to a multi-provider setup](../unit_4_1/README.md)
+With that let us continue with [Unit 4 Lesson 1 - Moving to a multi-provider setup](../../unit_4/lesson_1/README.md)
 
 ## Sample Solution 🛟
 
-You find the sample solution in the folder `units/unit_3_4/solution_u34`.
+You find the sample solution in the directory `units/unit_3/lesson_4/solution_u3_l4`.
 
 ## Further References 📝
 

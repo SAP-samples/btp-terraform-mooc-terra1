@@ -1,4 +1,4 @@
-# Unit 3.1 - Using Variables
+# Unit 3 Lesson 1 - Using Variables
 
 ## Goal 🎯
 
@@ -44,7 +44,7 @@ With these basics we are good to start with rewriting our configuration using va
 
 ### Cleaning up the configuration
 
-First we create a new file called `variables.tf` in the folder `learning-terraform-on-sapbtp`. This is where we will put our variables that we extract.
+First we create a new file called `variables.tf` in the directory `learning-terraform-on-sapbtp`. This is where we will put our variables that we extract.
 
 Let us start with the `provider.tf` file. Here we have put a fix value for the global account that should certainly be a variable. Consequently we add the following code into the `variables.tf` file:
 
@@ -148,7 +148,7 @@ Replace the placeholder `<YOUR GLOBALACCOUNT_SUBDOMAIN>` with the subdomain of y
 > [!NOTE]
 > We named the file `terraform.tfvars` as this will be automatically picjed up when executing a command of the Terraform CLI. If you want to name it differently you must add `-var-file=filename` to point the CLI to the right file.
 
-With this the setup is finished now at least for the configuration we provisioned before. But wait a second: aren't there some constraints concerning the variables we defined? We did not think about that when we used static values, but now, maybe it would make sense to bring in some additional validation. 
+With this the setup is finished now at least for the configuration we provisioned before. But wait a second: aren't there some constraints concerning the variables we defined? We did not think about that when we used static values, but now, maybe it would make sense to bring in some additional validation.
 
 Let's do that!
 
@@ -252,11 +252,11 @@ That is what we wanted to see and our first small refactoring of the configurati
 
 We introduced input variables to our configuration to make the setup more flexible. In addition we added several validations for these variables to avoid wrongly configured subaccounts. Great stuff!
 
-With that let us continue with [Unit 3.2 - Using locals](../unit_3_2/README.md)
+With that let us continue with [Unit 3 Lesson 2 - Using locals](../lesson_2/README.md)
 
 ## Sample Solution 🛟
 
-You find the sample solution in the folder `units/unit_3_1/solution_u31`.
+You find the sample solution in the directory `units/unit_3/lesson_1/solution_u3_l1`.
 
 ## Further References 📝
 

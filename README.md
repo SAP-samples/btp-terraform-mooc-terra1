@@ -1,33 +1,41 @@
-# SAP-samples/repository-template
-This default template for SAP Samples repositories includes files for README, LICENSE, and .`reuse/dep5`. All repositories on github.com/SAP-samples will be created based on this template.
-
-# Containing Files
-
-1. The LICENSE file:
-In most cases, the license for SAP sample projects is `Apache 2.0`.
-
-2. The `.reuse/dep5` file:
-The [Reuse Tool](https://reuse.software/) must be used for your samples project. You can find the `.reuse/dep5` in the project initial. Please replace the parts inside the single angle quotation marks < > by the specific information for your repository.
-
-3. The README.md file (this file):
-Please edit this file as it is the primary description file for your project. You can find some placeholder titles for sections below.
-
-# [Title]
-<!-- Please include descriptive title -->
 
 <!--- Register repository https://api.reuse.software/register, then add REUSE badge:
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/REPO-NAME)](https://api.reuse.software/info/github.com/SAP-samples/REPO-NAME)
 -->
 
+# Getting Started with Terraform on SAP BTP
+
 ## Description
-<!-- Please include SEO-friendly description -->
 
-## Requirements
+This repository contains the code samples used throughout the course "Getting Started with Terraform on SAP BTP".
 
-## Download and Installation
+## Structure
 
-## Known Issues
-<!-- You may simply state "No known issues. -->
+The repository is structured in line with the layout of the course. The walkthrough of the code for every lesson is described in an extensive `README.md`. We also provide the solution for each lesson as part of the corresponding directory in this repository.
+
+### Unit 1
+
+- [Lesson 3 - Preparing the setup for Terraform on SAP BTP](./units/unit_1/lesson_3/README.md)
+
+### Unit 2
+
+- [Lesson 1 - Configuring the first basic Terraform setup ](./units/unit_2/lesson_1/README.md)
+- [Lesson 2 - Applying the Terraform setup to SAP BTP](./units/unit_2/lesson_2/README.md)
+- [Lesson 3 - Inspecting the Terraform state](./units/unit_2/lesson_3/README.md)
+
+### Unit 3
+
+- [Lesson 1 - Using Variables](./units/unit_3/lesson_1/README.md)
+- [Lesson 2 - Using Locals](./units/unit_3/lesson_2/README.md)
+- [Lesson 3 - Adding additional resources to the Terraform Configuration](./units/unit_3/lesson_3/README.md)
+- [Lesson 4 - Setting up a Cloud Foundry environment via Terraform](./units/unit_3/lesson_4/README.md)
+
+### Unit 4
+
+- [Lesson 1 - Moving to a multi-provider setup](./units/unit_4/lesson_1/README.md)
+- [Lesson 2 - Handing over to the development team](./units/unit_4/lesson_2/README.md)
+- [Lesson 3 - Extracting reuseable logic into modules](./units/unit_4/lesson_3/README.md)
+- [Lesson 4 - Iterating over lists in Terraform](./units/unit_4/lesson_4/README.md)
 
 ## Support, Feedback, Contributing
 

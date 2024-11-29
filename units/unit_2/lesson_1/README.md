@@ -1,4 +1,4 @@
-# Unit 2.1 - Configuring the first basic Terraform setup
+# Unit 2 Lesson 1 - Configuring the first basic Terraform setup
 
 ## Goal 🎯
 
@@ -86,11 +86,11 @@ With that the necessary information that enables the provider to execute the aut
 
 We laid the foundation for our Terraform journey, namely the basic configuration of the Terraform provider fro SAP BTP as well as the provisioning of the information needed for authentication.
 
-With that let us continue with [Unit 2.2 - Applying the Terraform setup to SAP BTP](../unit_2_2/README.md)
+With that let us continue with [Unit 2 Lesson 2 - Applying the Terraform setup to SAP BTP](../lesson_2/README.md)
 
 ## Sample Solution 🛟
 
-You find the sample solution in the folder `units/unit_2_1/solution_u21`.
+You find the sample solution in the directory `units/unit_2/lesson_1/solution_u2_l1`.
 
 ## Further References 📝
 

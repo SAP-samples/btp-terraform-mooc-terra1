@@ -1,4 +1,4 @@
-# Lesson 4.4 - Iterating over lists in Terraform
+# Lesson 4 Lesson 4 - Iterating over lists in Terraform
 
 ## Goal 🎯
 
@@ -26,7 +26,7 @@ And indeed there is. We can use the meta argument [`for_each`](https://developer
 
 ### Adding the emergency administrators to the configuration
 
-First we switch to the `learning-terraform-on-sapbtp` directory and add the following code to the `variables.tf` file:
+First we switch to the `learning-terraform-on-sapbtp/BTP` directory and add the following code to the `variables.tf` file:
 
 ```terraform
 variable "subaccount_emergency_admins" {
@@ -65,7 +65,7 @@ Exactly what we wanted to achieve and we did not have to do unnecessary copy&pas
 
 ### Applying the change
 
-You know the drill by now, right? We switch into the `learning-terraform-on-sapbtp` directory and do the homework first:
+You know the drill by now, right? We switch into the directory `learning-terraform-on-sapbtp/BTP` and do the homework first:
 
 ```bash
 terraform fmt
@@ -117,7 +117,7 @@ Happy Terraforming!
 
 ## Sample Solution 🛟
 
-You find the sample solution in the folder `units/unit_4_4/solution_u44`.
+You find the sample solution in the directory `units/unit_4_4/solution_u44`.
 
 ## Further References 📝
 

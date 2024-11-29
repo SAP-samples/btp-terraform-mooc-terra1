@@ -1,4 +1,4 @@
-# Unit 3.2 - Using Locals
+# Unit 3 Lesson 2 - Using Locals
 
 ## Goal 🎯
 
@@ -24,7 +24,7 @@ To achieve this, we will now open the `main.tf` file and add the following secti
 ```terraform
 locals {
   subaccount_name      = "${var.subaccount_stage} ${var.project_name}"
-}  
+}
 ```
 
 The section `locals` defines all variables that can be used in the script via the `local.` prefix (instead of the `var.` prefix for the variables defined in the `variables` file).
@@ -49,7 +49,7 @@ resource "btp_subaccount" "project_subaccount" {
 }
 ```
 
-Now that the `subaccount_name` variable is not needed, and we instead use a `project_name`, we need to adapt our `variables.tf` file accordingly. 
+Now that the `subaccount_name` variable is not needed, and we instead use a `project_name`, we need to adapt our `variables.tf` file accordingly.
 Let's simply rename the variable `subaccount_name` to `project_name`:
 
 ```terraform
@@ -81,7 +81,7 @@ locals {
 }
 ```
 
-We use the `join` function, to combine two strings with a `-`. 
+We use the `join` function, to combine two strings with a `-`.
 
 The first string takes the `subaccount_stage` and the `project_name` variable that are connected via a `-`. In addition the `replace` function ensures, that all spaces (` `) are replaced with a `-`. As a last part of the first string, the resulting string will be converted with the function `lower` to lower case.
 
@@ -91,11 +91,11 @@ With this improvement, we no longer need to define our unique subaccount domain.
 
 Let's quickly replace `var.subaccount_subdomain` with `local.subaccount_subdomain` in the resource section for  `btp_subaccount`.
 
-Now there is one last thing we need to do. 
+Now there is one last thing we need to do.
 
 ### Setting the beta flag of the subaccount
 
-We want the script to setup the beta flag automatically, depending on the stage. We do that in three steps. 
+We want the script to setup the beta flag automatically, depending on the stage. We do that in three steps.
 
 In the first step we add the following line into the `locals` section of the `main.tf` file.
 
@@ -132,7 +132,7 @@ Finally, we can now remove the definition of the variable `subaccount_beta_enabl
 
 ### Applying all our changes
 
-Now that we made the changes, let's see what happens. 
+Now that we made the changes, let's see what happens.
 
 As we have introduced a new resource for the `rando_uuid`, we need to run first:
 
@@ -165,10 +165,12 @@ The same is true as well for the subaccount name.
 
 Locals are a great way to make your Terraform configuration rock-solid and use them to apply naming conventions to your BTP landscape.
 
+With that let us continue with [Unit 3 Lesson 3 - Adding additional resources to the Terraform Configuration](../lesson_3/README.md)
+
 
 ## Sample Solution 🛟
 
-You find the sample solution in the folder `units/unit_3_2/solution_u32`.
+You find the sample solution in the directory `units/unit_3/lesson_2/solution_u3_l2`.
 
 ## Further References 📝
 
