@@ -9,6 +9,7 @@ checksums
 CLA
 CLI
 CodeQL
+Codespace
 config
 Copilot
 customizations
@@ -73,6 +74,7 @@ UI
 UUID
 uuid
 VS
+walkthrough
 YAML
 yaml
 yml

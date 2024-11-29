@@ -192,7 +192,7 @@ Therefore, there is one last step we need to make, so that the state file knows 
 
 ## Ensure that our state information remains stable
 
-To tell our state that we have moved certain assets in our code, we need to create a so called [`moved` block](https://developer.hashicorp.com/terraform/language/moved) that instructs Terraform how to handle the moved resources whan a state refresh happens. For that we create a new file called `moved.tf` in the same directory as the `main.tf` file.
+To tell our state that we have moved certain assets in our code, we need to create a so called [`moved` block](https://developer.hashicorp.com/terraform/language/moved) that instructs Terraform how to handle the moved resources when a state refresh happens. For that we create a new file called `moved.tf` in the same directory as the `main.tf` file.
 
 We copy the following code into the file:
 
@@ -249,7 +249,7 @@ Success, we successfully restructured our code and have now a re-usable module t
 
 ## Summary 🪄
 
-You have learned now the concept of modules to extract reusable configurations. In additon we also realigned the state of the setup after refactoring the configuration via `moved` blocks.
+You have learned now the concept of modules to extract reusable configurations. In addition we also realigned the state of the setup after refactoring the configuration via `moved` blocks.
 
 With that let us continue with [Unit 4 Lesson 4 - Iterating over lists in Terraform](../lesson_4/README.md)
 
@@ -260,6 +260,6 @@ You find the sample solution in the directory `units/unit_4/lesson_3/solution_u4
 
 ## Further References 📝
 
-- [Reafctoring](https://developer.hashicorp.com/terraform/language/modules/develop/refactoring)
+- [Refactoring](https://developer.hashicorp.com/terraform/language/modules/develop/refactoring)
 - [Modules](https://developer.hashicorp.com/terraform/language/modules)
 - [`moved` block](https://developer.hashicorp.com/terraform/language/moved)

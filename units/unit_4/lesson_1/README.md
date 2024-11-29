@@ -38,7 +38,7 @@ To separate the Terraform configuration for Cloud Foundry, we restructure our se
 - `BTP` - This directory will contain all the configuration for *BTP specific* resources
 - `CloudFoundry` - This directory will contain all the configuration for *Cloud Foundry specific* resources
 
-We move all the configuration inlcuding the `*.tfstate` file as well as the `.terraform` directory and the `.terraform.lock.hcl` file into the `BTP` directory. The directory `learning-terraform-on-sapbtp` should now only contain the two new directories.
+We move all the configuration including the `*.tfstate` file as well as the `.terraform` directory and the `.terraform.lock.hcl` file into the `BTP` directory. The directory `learning-terraform-on-sapbtp` should now only contain the two new directories.
 
 We switch into the directory `CloudFoundry`. We create a new file called `provider.tf` in the newly created directory with the following content:
 
