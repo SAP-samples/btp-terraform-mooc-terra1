@@ -185,7 +185,7 @@ We can see this be executing the `terraform plan` command:
 
 TODO picture
 
-Therefore, there is one last adjustemt we need to make, so that the state file knows what we've changed and how the new addresses of the already created resources look like.
+Therefore, there is one last adjustment we need to make, so that the state file knows what we've changed and how the new addresses of the already created resources look like.
 
 ## Ensure that our state information remains stable
 

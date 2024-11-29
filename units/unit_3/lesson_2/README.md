@@ -11,14 +11,14 @@ One important aspect in our company is to apply naming conventions to our resour
 - the subaccount name must consist of the stage of the project (`DEV`, `TEST` or `PROD`) and the project name
 - the subdomain of our subaccounts must follow the template "<stage of the project>-<projectname>-<uuid>" all in lower letters. Any space must be replaced by a "-"
 
-In addition it is corporate givernance that no beta features are enables on subaccounts that are in the stage `PROD`
+In addition it is corporate governance that no beta features are enables on subaccounts that are in the stage `PROD`
 
-Currently this is not ensured by our Terraform sconfiguration. To achieve this we will:
+Currently this is not ensured by our Terraform configuration. To achieve this we will:
 
-- rewrite our variables to refelct the necessary input only
+- rewrite our variables to reflect the necessary input only
 - make use of [`local values`](https://developer.hashicorp.com/terraform/language/values/locals)
 
-`Local Values` or `locals` are used in a Terraform configuration to reduce the repetetive usage of values that could be kept in one place and then used at several spots in the configurations. They are also quite useful to transform variables and by this either ensure naming conventions or deduct values from other input values.
+`Local Values` or `locals` are used in a Terraform configuration to reduce the repetitive usage of values that could be kept in one place and then used at several spots in the configurations. They are also quite useful to transform variables and by this either ensure naming conventions or deduct values from other input values.
 
 ### Cleaning up the variables
 
@@ -42,7 +42,7 @@ We default it to the already existing name, to make our life easier. The stage i
 
 ### Building the subaccount name
 
-Accoriding to the naming convention the subaccount name must the combination of the stage and project name. To achieve this, we open the `main.tf` file and add the following section:
+According to the naming convention the subaccount name must the combination of the stage and project name. To achieve this, we open the `main.tf` file and add the following section:
 
 ```terraform
 locals {
@@ -54,7 +54,7 @@ The `locals` block defines local values that can then be used in the `main.tf`. 
 
 To create the string for the subaccount name we used [string templates](https://developer.hashicorp.com/terraform/language/expressions/strings#string-templates) to join the two string into one.
 
-Now we need to replace the `var.subaccount_name` used in the resource `btp_subaccount` with our newly defined local value. We refernce the local value via `local.<local value name>`. Consequently we adjust the code as follows:
+Now we need to replace the `var.subaccount_name` used in the resource `btp_subaccount` with our newly defined local value. We reference the local value via `local.<local value name>`. Consequently we adjust the code as follows:
 
 ```terraform
 resource "btp_subaccount" "project_subaccount" {
@@ -98,7 +98,7 @@ This is now a bit more sophisticated as we combine several functions. Let walk t
 - We use the already known string template to combine the `var.subaccount_stage` and the `var.project_name` and add a "-" in between.
 - The resulting string is handed over to the [replace function](https://developer.hashicorp.com/terraform/language/functions/replace). We replace any space (`" "`) in the string by `"-"`
 - The resulting string will then be put into lower case via the [`lower` function](https://developer.hashicorp.com/terraform/language/functions/lower).
-- The last thing we need is to add the UUID which is taken from the resource `random_uuid` via `random_uuid.uuid.result` and join that with the string we prpared before. We use the [`join` function](https://developer.hashicorp.com/terraform/language/functions/join) using `"-"` as seperator.
+- The last thing we need is to add the UUID which is taken from the resource `random_uuid` via `random_uuid.uuid.result` and join that with the string we prepared before. We use the [`join` function](https://developer.hashicorp.com/terraform/language/functions/join) using `"-"` as separator.
 
 This gives us the value of the subdomain as we wanted to. Let us finish this and set this local value instead of the variable in the resource configuration, which should now look like this:
 
@@ -119,7 +119,7 @@ Now there is one last thing we need to do.
 
 ### Setting the beta flag of the subaccount
 
-We want the dedcut the value of the beta flag depending on the stage. We do that by adding another local value called `beta_enabled` to the `locals` block which not looks like this:
+We want the deduct the value of the beta flag depending on the stage. We do that by adding another local value called `beta_enabled` to the `locals` block which not looks like this:
 
 ```terraform
 locals {
