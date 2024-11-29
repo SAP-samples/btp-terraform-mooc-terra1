@@ -85,32 +85,31 @@ To use [Codespaces](https://docs.github.com/codespaces/overview) you must have a
 
 You can then access the Codespace following these steps:
 
-1. Open the [GitHub repository "Getting Started with Terraform on SAP BTP"](https://github.com/SAP-samples/btp-terraform-mooc-terra1).
-
-    ![Screenshot of GitHub repository for "Getting Started with Terraform on SAP BTP"](images/repository-overview-screen.png)
-
 1. Click on this button and create the Codespace:
 
    [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=892078617&skip_quickstart=true&machine=basicLinux32gb&geo=EuropeWest&devcontainer_path=.devcontainer%2Fdevcontainer.json)
 
 
-1. A configuration overview will be opened in the browser. You can adjust the region to a location near you (1) and confirm the creation of the Codespace (2):
+1. A configuration overview will be opened in the browser. You can adjust the region to a location near you (1) as well as the machine type (2). After that confirm the creation of the Codespace (3):
 
-    ![Screenshot of Codespace configuration](images/codespace-config.png)
+    ![Screenshot of Codespace configuration](images/codespace-config-screen.png)
 
     This will take a few minutes.
 
-1. While the Codespace is created for you, you will see this screen
+2. While the Codespace is created for you, you will see this screen
 
-    ![Screenshot of navigation to Codespace creation](images/codespace-creation.png)
+    ![Screenshot of navigation to Codespace creation](images/codespace-creation-screen.png)
 
-1. Once all is done, you are in your Codespace.
+> [!NOTE]
+> You firewall seting might impact the connection to GitHub Codespaces. If you run into an error concerning connection issues during the Codespace setup, make sure to check your firewall settings
 
-    ![Screenshot of GitHub Codespace view on the repository](images/codespace-screen.png)
+
+3. Once all is done, you are in your Codespace.
+
+    ![Screenshot of GitHub Codespace view on the repository](images/codespace-repo-start-screen.png)
 
 > [!IMPORTANT]
 > GitHub codespaces are [free for a certain amount of time per month](https://docs.github.com/en/billing/managing-billing-for-your-products/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts). For the hands-on session the free time is more than enough. **Don't forget to delete your codespace again when you are finished!**
-
 
 ### Local installation
 
