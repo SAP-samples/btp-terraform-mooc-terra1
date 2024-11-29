@@ -1,5 +1,5 @@
 {
-  "name": "Terraform devcontainer - with env file",
+  "name": "Terraform dev container - with env file",
   "image": "mcr.microsoft.com/devcontainers/base:debian",
   "features": {
     "ghcr.io/devcontainers/features/terraform:1": {},

@@ -9,7 +9,20 @@
 
 This repository contains the code samples used throughout the course "Getting Started with Terraform on SAP BTP".
 
-## Structure
+## Prerequisites
+
+There are some requirements you must fulfill before being able to start with the coding exercises using the Terraform provider for SAP BTP. The prerequistes are:
+
+- You have an SAP BTP Trial Account. If you don't have one yet, you can get one [here](https://developers.sap.com/tutorials/hcp-create-trial-account.html).
+- Make sure that your SAP Universal ID is configured correctly. You can find the instructions in [SAP Note 3085908](https://me.sap.com/notes/3085908).
+- The Terraform provider does not support 2FA. Make sure that this option is not enforced for your account.
+
+Depending on the setup described in [unit 1 lesson 3](./units/unit_1/lesson_3/README.md) further prerequisites are required:
+
+- If you intend to use the [recommended 'dev container' tools option](./units/unit_1/lesson_3/README.md) you must have [Docker Desktop](https://www.docker.com/products/docker-desktop/) and [Visual Studio Code](https://code.visualstudio.com/) including the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension installed on your machine.
+- You want to use A GitHub Codespace you must have a GitHub user. If you don't have one, [sign-up on GitHub](https://github.com/signup).
+
+## Content Structure
 
 The repository is structured in line with the layout of the course. The walkthrough of the code for every lesson is described in an extensive `README.md`. We also provide the solution for each lesson as part of the corresponding directory in this repository.
 
