@@ -28,10 +28,10 @@ We will do this in three steps:
 In a first step we create a directory called `modules` and a sub sub-directory called `srvc-baseline`.
 
 In the directory `srvc-baseline` we create two files:
-- `srvc-baseline_variables.tf`: this file will create the variables for our module
-- `srvc-baseline.tf`: this file contains the main script of the module
+- `srvc_baseline_variables.tf`: this file will create the variables for our module
+- `srvc_baseline.tf`: this file contains the main script of the module
 
-Now we copy-and-paste the code from our `main.tf` file that takes care of the entitlements, service instance creation and the app subscriptions into the `srvc-baseline.tf` file (and save it), so that the `srvc-baseline.tf` file looks like this:
+Now we copy-and-paste the code from our `main.tf` file that takes care of the entitlements, service instance creation and the app subscriptions into the `srvc_baseline.tf` file (and save it), so that the `srvc_baseline.tf` file looks like this:
 
 ```terraform
 resource "btp_subaccount_entitlement" "alert_notification_service_standard" {
@@ -73,9 +73,9 @@ resource "btp_subaccount_subscription" "feature_flags_dashboard_app" {
 }
 ```
 
-Now we delete the section in the `main.tf` file that we copied over to the `srvc-baseline.tf` file in the directory `modules/srvc-baseline`.
+Now we delete the section in the `main.tf` file that we copied over to the `srvc_baseline.tf` file in the directory `modules/srvc-baseline`.
 
-A module can define constraints concerning the required configuration that the Terraform configuration (also known as *calling* module) mus provide. Therefore, we add a section for the provider that we expect to be initialized. For that, we add the following lines into the `srvc-baseline.tf` file:
+A module can define constraints concerning the required configuration that the Terraform configuration (also known as *calling* module) mus provide. Therefore, we add a section for the provider that we expect to be initialized. For that, we add the following lines into the `srvc_baseline.tf` file:
 
 ```terraform
 terraform {
@@ -88,9 +88,9 @@ terraform {
 ```
 
 > [!TIP]
-> We could have created a separate provider.tf for that purpose as well within the directory. But as we don't have to provide the provider configuration, we can at it to the `srvc-baseline.tf` file. The provider configuration is taken calling module.
+> We could have created a separate provider.tf for that purpose as well within the directory. But as we don't have to provide the provider configuration, we can at it to the `srvc_baseline.tf` file. The provider configuration is taken calling module.
 
-Now we must move the definition of the local variable `service_name_prefix` from the  `main.tf` file to the `srvc-baseline.tf` file, so that the file looks like this:
+Now we must move the definition of the local variable `service_name_prefix` from the  `main.tf` file to the `srvc_baseline.tf` file, so that the file looks like this:
 
 ```terraform
 terraform {
@@ -105,11 +105,7 @@ locals {
   service_name_prefix = lower(replace("${var.project_stage}-${var.project_name}", " ", "-"))
 }
 
-resource "btp_subaccount_entitlement" "alert_notification_service_standard" {
-  subaccount_id = var.subaccount_id
-  service_name  = "alert-notification"
-  plan_name     = "standard"
-}
+...
 ```
 
 Delete the `service_name_prefix` local value from the `main.tf` file. The `locals` section in the `main.tf` file then looks like this:
@@ -129,7 +125,7 @@ That was a big piece of work here but we are not done yet. Let's tackle the next
 
 A module can be compared to a library or a function that we reuse. In analogy to that we must define the input that the caller must provide and that we need in our configuration.
 
-To accomplish this, we take the following code and paste it into the `srvc-baseline_variables.tf` file, that we created before:
+To accomplish this, we take the following code and paste it into the `srvc_baseline_variables.tf` file, that we created before:
 
 ```terraform
 variable "subaccount_id" {
@@ -154,13 +150,67 @@ variable "project_stage" {
 }
 ```
 
-That's all. These three variables are now the parameters, that we will need to provide, when calling this module.
+We must replace the refernce to the `btp_subaccount.project_subaccount.id` in our `srvc_baseline.tf` that we pulled in when we did the copy &paste from the `main.tf`. This must be replaced in the file with the variable `subaccount_id` that we defined. after the replacement the `srvc_baseline.tf` should look like this:
 
-Our work in the module is done. Now we need to call the module from our `main.tf` file.
+```terraform
+terraform {
+  required_providers {
+    btp = {
+      source = "SAP/btp"
+    }
+  }
+}
+
+locals {
+  service_name_prefix = lower(replace("${var.project_stage}-${var.project_name}", " ", "-"))
+}
+
+resource "btp_subaccount_entitlement" "alert_notification_service_standard" {
+  subaccount_id = var.subaccount_id
+  service_name  = "alert-notification"
+  plan_name     = "standard"
+}
+
+resource "btp_subaccount_entitlement" "feature_flags_service_lite" {
+  subaccount_id = var.subaccount_id
+  service_name  = "feature-flags"
+  plan_name     = "lite"
+}
+
+resource "btp_subaccount_entitlement" "feature_flags_dashboard_app" {
+  subaccount_id = var.subaccount_id
+  service_name  = "feature-flags-dashboard"
+  plan_name     = "dashboard"
+}
+
+data "btp_subaccount_service_plan" "alert_notification_service_standard" {
+  subaccount_id = var.subaccount_id
+  name          = "standard"
+  offering_name = "alert-notification"
+  depends_on    = [btp_subaccount_entitlement.alert_notification_service_standard]
+}
+
+resource "btp_subaccount_service_instance" "alert_notification_service_standard" {
+  subaccount_id  = var.subaccount_id
+  serviceplan_id = data.btp_subaccount_service_plan.alert_notification_service_standard.id
+  name           = "${local.service_name_prefix}-alert-notification"
+}
+
+resource "btp_subaccount_subscription" "feature_flags_dashboard_app" {
+  subaccount_id = var.subaccount_id
+  app_name      = "feature-flags-dashboard"
+  plan_name     = "dashboard"
+  depends_on    = [btp_subaccount_entitlement.feature_flags_dashboard_app]
+}
+```
+
+Now we are consistent again. Our work in the module is done.
+
+The three variables are now the parameters, that we will need to provide, when calling this module. and that is what we do next.
 
 ### Integrating the module into our code
 
-To call our module that will handle the entitlements and provisioning of our BTP services and apps, we add the following section to the `main.tf`:
+To call the module, we add the following section to the `main.tf`:
 
 ```terraform
 module "srvc_baseline" {
@@ -177,15 +227,27 @@ The setup comprises the following parts:
 - The `source` attribute tells Terraform where to find the module. in this case in the local file system.
 - In addition we see the three variables `subaccount_id`, `project_name` and `project_stage` that we have defined before in our module. These variables are assigned with the variables that are known to the `main.tf` file.
 
-So, you might be asking yourself, whether the code would be working now immediately. But that won't happen. Why?
+So, you might ask yourself, if the code worka as before. But that won't happen. The question is why this is the case?
 
 By moving resources from the `main.tf` file to the module, the state file would no longer be able to tell where the resources it created before are located now.
 
-We can see this be executing the `terraform plan` command:
+Let us validate this assumption. First we need to initialize the new setup and make Terraform aware that we brought in a new module. We do so by executing
 
-TODO picture
+```bash
+terraform get
+```
 
-Therefore, there is one last adjustment we need to make, so that the state file knows what we've changed and how the new addresses of the already created resources look like.
+The output should look like this:
+
+![console output of terraform get](./images/u4l3_terraform_get.png)
+
+We can see this be executing the `terraform plan` command that gives us a lengthy output ending with:
+
+```bash
+Plan: 5 to add, 0 to change, 5 to destroy.
+```
+
+We did not wnat to change anything. Therefore, there is one last adjustment we must make, namely manipulate the state file to let it know what we've changed and how the new addresses of the already created resources look like.
 
 ## Ensure that our state information remains stable
 
@@ -232,17 +294,34 @@ terraform fmt
 terraform validate
 ```
 
-Looks good, the let's apply the change:
+Looks good, the let's plan the change:
 
 ```bash
-terraform apply
+terraform plan -out=unit43.out
+```
+
+The outout should look like this:
+
+![console output of terraform plan including the moved block](./images/u4l3_terraform_plan_moved.png)
+
+This looks like what we wanted to achieve: no changes in the infrastructure but a move of the resources inside of the state.
+
+As we are manipulating the state we want to make a backup before we do so. Better safe than sorry. So copy the file `terraform.tfstate` to `terraform.tfstate.backupu4l3`
+
+Now let us do the necessary and apply the change:
+
+```bash
+terraform apply "unit43.out"
 ```
 
 The result should look like this:
 
-TODO screenshot
+![console output of terraform apply including the moved block](./images/u4l3_terraform_apply_moved.png)
 
-Success, we successfully restructured our code and have now a re-usable module to setup our BTP services and apps!
+Success, we restructured our code and have a re-usable module to setup our BTP services and apps!
+
+> [!NOTE]
+> You can keep the `moved.tf` file in your setup. Terraform will ignore it as it recognizes that no movement of resource addresses is necesary. However, whenever you would add another resource in the future and give it the same address as a resource in the `moved` block you might run into issues. In productive scenarios we there fore recommend to remove the file after the state was updated correctly.
 
 ## Summary 🪄
 
