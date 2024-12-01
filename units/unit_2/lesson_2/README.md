@@ -76,7 +76,7 @@ Let us apply this first configuration. The application of configurations follows
    ```bash
    terraform fmt
    ```
-   No output appeared, which means that everything was formated correctly. If some file names appear, don't worry, that means that Terraform code was brought into the canonical format.
+   No output appeared, which means that everything was formatted correctly. If some file names appear, don't worry, that means that Terraform code was brought into the canonical format.
 
 1. After that it makes sense to do a static validation of our code where we do not yet need a connection to SAP BTP. We execute the following command:
 

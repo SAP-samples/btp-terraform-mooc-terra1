@@ -34,6 +34,7 @@ HCL
 HashiCorp
 hashicorp
 IdP
+init
 json
 JSON
 jq
