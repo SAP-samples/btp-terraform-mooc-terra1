@@ -100,7 +100,7 @@ terraform state list
 
 ![console output of terraform state list with for_each](./images/u4l4_terraform_state_list_for_each.png)
 
-Interesting. The `each.key` was set to the enty in the list as this should be unique in a set. Good to know.
+Interesting. The `each.key` was set to the entry in the list as this should be unique in a set. Good to know.
 
 Mission accomplished, we added the new administrators.
 
@@ -110,7 +110,8 @@ We learned how we can iterate over lists using the Terraform meta argument `for_
 
 And with that ... we have done it all, our first journey with a Terraform configuration is successfully completed 🥳
 
-Maybe there is one more thing that we can do. As we have everthing in place we can also do a cleanup and tear everything fown again. But how can we do that?
+
+Maybe there is one more thing that we can do. As we have everything in place we can also do a cleanup and tear everything down again. But how can we do that?
 
 ### Cleanup
 
