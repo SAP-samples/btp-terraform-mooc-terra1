@@ -69,17 +69,17 @@ terraform plan -out=unit33.out
 
 The output should look like this:
 
-TODO picture
+![console output of terraform plan for entitlements](./images/u3l3_terraform_plan_entitlements.png)
 
 Three resources to be added, that is what we expected. We can apply the plan via:
 
 ```bash
-terraform apply 'unit33.out'
+terraform apply "unit33.out"
 ```
 
 The output should look like this:
 
-TODO picture
+![console output of terraform apply for entitlements](./images/u3l3_terraform_apply_entitlements.png)
 
 That worked like a charm. We can of course inspect the state and jump to the cockpit to verify that everything is place.
 
@@ -185,7 +185,7 @@ terraform fmt
 terraform validate
 ```
 
-No issues found, then let's plan the change:
+No issues found, then let's plan the change and overwrite the existing plan file:
 
 ```bash
 terraform plan -out=unit33.out
@@ -193,17 +193,17 @@ terraform plan -out=unit33.out
 
 This should result in:
 
-TODO picture
+![console output of terraform plan for service instance](./images/u3l3_terraform_plan_service_instance.png)
 
 Looks good, let's apply things then:
 
 ```bash
-terraform apply 'unit33.out'
+terraform apply "unit33.out"
 ```
 
 We should see an output like this:
 
-TODO picture
+![console output of terraform apply for service instance](./images/u3l3_terraform_apply_service_instance.png
 
 Great, only one more thing to do, subscribing to the application.
 
@@ -239,17 +239,17 @@ terraform plan -out=unit33.out
 
 The result should look like this:
 
-TODO screenshot
+![console output of terraform plan for app subscription](./images/u3l3_terraform_plan_app_subscription.png)
 
 And with that we apply the change to our subaccount:
 
 ```bash
-terraform apply 'unit33.out'
+terraform apply "unit33.out"
 ```
 
 The result should look like this:
 
-TODO screenshot
+![console output of terraform apply for app subscription](./images/u3l3_terraform_apply_app_subscription.png)
 
 What a ride, but we made it. We added entitlements, create a service instance as well as an app subscription in our subaccount.
 

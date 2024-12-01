@@ -40,6 +40,9 @@ variable "project_name" {
 
 We default it to the already existing name, to make our life easier. The stage is already available as variable `subaccount_stage`, so we can continue with the necessary changes in the `main.tf`.
 
+> [!NOTE]
+> You might now see some errors in the `main.tf` as the referenced variables are no longer existing. Don't worry, we will fix this by defining and assigning the local values in the following sections.
+
 ### Building the subaccount name
 
 According to the naming convention the subaccount name must the combination of the stage and project name. To achieve this, we open the `main.tf` file and add the following section:
@@ -159,6 +162,10 @@ As we have introduced a new resource for the `rando_uuid`, we need to run first:
 terraform init
 ```
 
+The output should look like this:
+
+![console output of terraform init](./images/u3l2_terraform_init.png)
+
 Let's first ensure that everything is formatted and static validation passes:
 
 ```bash
@@ -169,12 +176,12 @@ terraform validate
 Looks good, now let's see that happens if we let Terraform plan the changes:
 
 ```terraform
-terraform plan
+terraform plan -out=unit32.out
 ```
 
 The output should look like this:
 
-TODO Picture
+![console output of terraform plan](./images/u3l2_terraform_plan.png)
 
 We see that the subaccount will be deleted and created again, as we have assigned a different subdomain to it. This is what we expected by this type of change
 
@@ -184,12 +191,12 @@ We see that the subaccount will be deleted and created again, as we have assigne
 As we are sure, that this is what we want, we apply the changes:
 
 ```terraform
-terraform apply
+terraform apply "unit32.out"
 ```
 
 The output should look like this:
 
-TODO Picture
+![console output of terraform apply](./images/u3l2_terraform_apply.png)
 
 If we switch back to your SAP BTP cockpit and check the subaccount, we see, that the attributes of the subaccount are set according to our configuration
 

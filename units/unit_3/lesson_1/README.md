@@ -15,7 +15,6 @@ To achieve this we must define so called [input variables](https://developer.has
 Terraform provides a dedicated `variable` block to define them. Here is an example:
 
 ```terraform
-
 variable "subaccount_id" {
   type        = string
   description = "The ID of the subaccount on SAP BTP."
@@ -244,7 +243,7 @@ terraform plan
 
 The output should look like this:
 
-TODO Picture
+![console output of terraform plan](./images/u3l1_terraform_plan.png)
 
 That is what we wanted to see and our first small refactoring of the configuration is complete.
 

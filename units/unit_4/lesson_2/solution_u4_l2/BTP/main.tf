@@ -7,7 +7,7 @@ locals {
   subaccount_subdomain = join("-", [lower(replace("${var.subaccount_stage}-${var.project_name}", " ", "-")), random_uuid.uuid.result])
   beta_enabled         = var.subaccount_stage == "PROD" ? false : true
   service_name_prefix  = lower(replace("${var.subaccount_stage}-${var.project_name}", " ", "-"))
-  subaccount_cf_org    = lower(replace("${var.subaccount_stage}-${var.project_name}", " ", "-"))
+  subaccount_cf_org    = local.subaccount_subdomain
 }
 
 resource "btp_subaccount" "project_subaccount" {

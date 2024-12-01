@@ -30,13 +30,10 @@ variable "cf_landscape_label" {
 }
 ```
 
-We added `default = ""` to make the parameter optional. We save the change and switch over to the `main.tf` file and add a new local. Add the following code to the `locals` section:
+We added `default = ""` to make the parameter optional. We save the change and switch over to the `main.tf` file and add a new local value to provide the instance name. We decide to follow the same naming convention as for the subdomain of the subaccount to ensure uniqueness. Add the following code to the `locals` section:
 
 ```terraform
-locals {
-  ...
-  subaccount_cf_org    = lower(replace("${var.subaccount_stage}-${var.project_name}", " ", "-"))
-}
+  subaccount_cf_org    = local.subaccount_subdomain
 ```
 
 Next we add the `btp_subaccount_environment_instance` resource:
@@ -171,17 +168,17 @@ terraform plan -out=unit34.out
 
 The result should look like this:
 
-TODO picture
+![console output of terraform plan for Cloud Foundry environment](./images/u3l4_terraform_plan_cf_env.png)
 
 Looks as expected, let's apply the change then:
 
 ```bash
-terraform plan 'unit34.out'
+terraform apply "unit34.out"
 ```
 
 The result should look like this:
 
-TODO picture
+![console output of terraform apply for Cloud Foundry environment](./images/u3l4_terraform_apply_cf_env.png)
 
 Looks good. we also see the explicitly set outputs.
 
