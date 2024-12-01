@@ -203,7 +203,7 @@ terraform apply "unit33.out"
 
 We should see an output like this:
 
-![console output of terraform apply for service instance](./images/u3l3_terraform_apply_service_instance.png
+![console output of terraform apply for service instance](./images/u3l3_terraform_apply_service_instance.png)
 
 Great, only one more thing to do, subscribing to the application.
 

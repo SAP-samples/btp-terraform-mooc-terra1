@@ -47,7 +47,6 @@ NextSteps
 OpenSSF
 onboarding
 ondemand
-png
 Pre
 pre
 PowerShell
