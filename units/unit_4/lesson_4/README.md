@@ -38,7 +38,7 @@ variable "subaccount_emergency_admins" {
 
 This new variable is a list of strings that contains the usernames of the emergency administrators. We default it to an empty list `[]` to make it an optional variable.
 
-> [!INFO]
+> [!NOTE]
 > As we want to use the list via `for_each` we cannot set the `sensitive` attribute. Reason is that the sensitive value could be exposed as a resource instance key.
 
 Next we add the values that we want to provide in the `terraform.tfvars` file using dummy values as usernames:
@@ -80,30 +80,27 @@ terraform plan -out=unit44.out
 
 The result should look like this:
 
-TODO picture
+![console output of terraform plan with for_each](./images/u4l4_terraform_plan_for_each.png)
 
 Looks as expected, let's apply the change then:
 
 ```bash
-terraform apply 'unit44.out'
+terraform apply "unit44.out"
 ```
 
 The result should look like this:
 
-TODO picture
+![console output of terraform apply with for_each](./images/u4l4_terraform_apply_for_each.png)
 
 Let us also check the state via:
 
-```terraform
+```bash
 terraform state list
 ```
 
-TODO picture
+![console output of terraform state list with for_each](./images/u4l4_terraform_state_list_for_each.png)
 
-Interesting. The `each.key` was set to the index of the list. Good to know.
-
-> [!TIP]
-> There is also another meta argument that is worth a look when it comes to creating multiple instances namely the [`count`](https://developer.hashicorp.com/terraform/language/meta-arguments/count).
+Interesting. The `each.key` was set to the enty in the list as this should be unique in a set. Good to know.
 
 Mission accomplished, we added the new administrators.
 
@@ -113,7 +110,44 @@ We learned how we can iterate over lists using the Terraform meta argument `for_
 
 And with that ... we have done it all, our first journey with a Terraform configuration is successfully completed 🥳
 
-Happy Terraforming!
+Maybe there is one more thing that we can do. As we have everthing in place we can also do a cleanup and tear everything fown again. But how can we do that?
+
+### Cleanup
+
+Terraform offers the [`terraform destroy`](https://developer.hashicorp.com/terraform/cli/commands/destroy) command to tear down the infrastructure. Let's do that as we can anyway rebuild it again. As our setup consists of two part, let us first remove the Cloud Foundry setup.
+
+We switch into the directory `learning-terraform-on-sapbtp/CloudFoundry` and execute the command
+
+```bash
+terraform destroy
+```
+
+A plan gets calculated and we are prompted if we want to destroy things. We validate the resources that are planned for deletion:
+
+![console output of terraform destroy Cloud Foundry confirmation prompt](./images/u4l4_terraform_destroy_cf.png)
+
+Looks good. We approve it with `yes`:
+
+![console output of terraform destroy Cloud Foundry result](./images/u4l4_terraform_destroy_cf_result.png)
+
+Part one done. Let's switch to the directory `learning-terraform-on-sapbtp/BTP` and so the same:
+
+```bash
+terraform destroy
+```
+
+A plan gets calculated and we are prompted if we want to destroy things. At the end we see the number of resources that are planned to be destroyed
+
+```bash
+Plan: 0 to add, 0 to change, 11 to destroy.
+
+```
+
+Looks good, but we validated the listed resources. Looks good, so let's confirm with `yes`. This will now take a bit, but at the end we should see the following result:
+
+![console output of terraform destroy SAP BTP subaccount result](./images/u4l4_terraform_destroy_btp_result.png)
+
+Now we are really at the end ... happy Terraforming!
 
 ## Sample Solution 🛟
 
@@ -124,4 +158,4 @@ You find the sample solution in the directory `units/unit_4_4/solution_u44`.
 - [Literal expressions](https://developer.hashicorp.com/terraform/language/expressions/types#literal-expressions)
 - [Meta argument `for_each`](https://developer.hashicorp.com/terraform/language/meta-arguments/for_each)
 - [type conversion function `toset`](https://developer.hashicorp.com/terraform/language/functions/toset)
-- [Meta argument `count`](https://developer.hashicorp.com/terraform/language/meta-arguments/count)
+- [`terraform destroy`](https://developer.hashicorp.com/terraform/cli/commands/destroy)
