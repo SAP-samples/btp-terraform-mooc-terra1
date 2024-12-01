@@ -21,7 +21,7 @@ variable "subaccount_id" {
 }
 ```
 
-The variable needs to have an identifier, in this case `subacount_id`. That is the only mandatory information you need to define a variable.
+The variable needs to have an identifier, in this case `subaccount_id`. That is the only mandatory information you need to define a variable.
 
 > [!IMPORTANT]
 > The name of a variable can be any valid identifier except the following reserved identifiers: `source`, `version`, `providers`, `count`, `for_each`, `lifecycle`, `depends_on` and `locals`.

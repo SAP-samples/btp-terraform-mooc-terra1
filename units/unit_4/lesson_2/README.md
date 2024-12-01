@@ -90,7 +90,7 @@ output "cf_space_url" {
 ```
 We construct the URL by combining the variable `subaccount_url` and filling in the blanks for the ID of the organization using the variable `cf_org_id` and the ID of the space via the corresponding field of the resource `cloudfoundry_space`.
 
-Last thing we need to to is to add the value of the subacount URL to the `terraform.tfvars` file.
+Last thing we need to to is to add the value of the subaccount URL to the `terraform.tfvars` file.
 
 ```terraform
 subaccount_url     = "<URL of SAP BTP subaccount>"
