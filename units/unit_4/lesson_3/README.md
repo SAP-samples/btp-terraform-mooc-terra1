@@ -150,7 +150,7 @@ variable "project_stage" {
 }
 ```
 
-We must replace the refernce to the `btp_subaccount.project_subaccount.id` in our `srvc_baseline.tf` that we pulled in when we did the copy &paste from the `main.tf`. This must be replaced in the file with the variable `subaccount_id` that we defined. after the replacement the `srvc_baseline.tf` should look like this:
+We must replace the reference to the `btp_subaccount.project_subaccount.id` in our `srvc_baseline.tf` that we pulled in when we did the copy &paste from the `main.tf`. This must be replaced in the file with the variable `subaccount_id` that we defined. after the replacement the `srvc_baseline.tf` should look like this:
 
 ```terraform
 terraform {
@@ -227,7 +227,7 @@ The setup comprises the following parts:
 - The `source` attribute tells Terraform where to find the module. in this case in the local file system.
 - In addition we see the three variables `subaccount_id`, `project_name` and `project_stage` that we have defined before in our module. These variables are assigned with the variables that are known to the `main.tf` file.
 
-So, you might ask yourself, if the code worka as before. But that won't happen. The question is why this is the case?
+So, you might ask yourself, if the code works as before. But that won't happen. The question is why this is the case?
 
 By moving resources from the `main.tf` file to the module, the state file would no longer be able to tell where the resources it created before are located now.
 
@@ -247,7 +247,7 @@ We can see this be executing the `terraform plan` command that gives us a length
 Plan: 5 to add, 0 to change, 5 to destroy.
 ```
 
-We did not wnat to change anything. Therefore, there is one last adjustment we must make, namely manipulate the state file to let it know what we've changed and how the new addresses of the already created resources look like.
+We did not want to change anything. Therefore, there is one last adjustment we must make, namely manipulate the state file to let it know what we've changed and how the new addresses of the already created resources look like.
 
 ## Ensure that our state information remains stable
 
@@ -300,7 +300,7 @@ Looks good, the let's plan the change:
 terraform plan -out=unit43.out
 ```
 
-The outout should look like this:
+The output should look like this:
 
 ![console output of terraform plan including the moved block](./images/u4l3_terraform_plan_moved.png)
 
