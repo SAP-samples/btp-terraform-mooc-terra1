@@ -52,7 +52,7 @@ resource "btp_subaccount" "project_subaccount" {
 This tells Terraform to create a resource of type `btp_subaccount`. We give the resource the name `project subaccount`.
 
 > [!TIP]
-> We will see the meaning of the resource name in the next unit "Inspecting the Terraform state".
+> We will see the meaning of the resource name in the next unit ["Inspecting the Terraform state"](../lesson_3/README.md).
 
 We added the values of the mandatory and optional parameters as defined by the requirements for our setup. Save the changes.
 
@@ -69,46 +69,47 @@ Let us apply this first configuration. The application of configurations follows
    ```
    We see the following result:
 
-   TODO picture
-
+   ![console output of terraform init](./images/u2l2_terraform_init.png)
 
 1. Next we should make sure that the formatting of the code is aligned with the canonical formatting defined for the Hashicorp Configuration language. We execute the following command:
 
    ```bash
    terraform fmt
    ```
-   We see the following result - looks good:
-
-   TODO picture
+   No output appeared, which means that everything was formated correctly. If some file names appear, don't worry, that means that Terraform code was brought into the canonical format.
 
 1. After that it makes sense to do a static validation of our code where we do not yet need a connection to SAP BTP. We execute the following command:
 
    ```bash
    terraform validate
    ```
-   We see the following result - nothing to worry about:
+   We see the following result - validation passed:
 
-   TODO picture
+   ![console output of terraform validate](./images/u2l2_terraform_validate.png)
 
 1. Now let us get serious. We execute a planning to check what Terraform intends to do based on our configuration. Execute the following command:
 
    ```bash
-   terraform plan -out=unit21.out
+   terraform plan -out=unit22.out
    ```
    We see the following result:
 
-   TODO picture
+   ![console output of terraform plan](./images/u2l2_terraform_plan.png)
 
    This looks like what we want to achieve right? We stored this plan using the `-out` parameter.
 
 1. We apply the stored plan and finally create our first resource on SAP BTP via the command:
 
    ```bash
-   terraform apply "unit21.out"
+   terraform apply "unit22.out"
    ```
    We see the following result:
 
-   TODO Picture
+   ![console output of terraform apply](./images/u2l2_terraform_apply.png)
+
+Let is also check that in the SAP BTP Cockpit:
+
+![SAP BTP cockpit - overview of subaccounts](./images/u2l2_sap_btp_cockpit.png)
 
 Great! We just created our first subaccount on SAP BTP using Terraform. Time for a short coffee break ☕, what do you think 😎
 

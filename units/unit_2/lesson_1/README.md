@@ -8,7 +8,8 @@ The goal of this unit is to have a basic configuration of a Terraform provider i
 
 ### The Terraform provider configuration
 
-As we are starting from scratch, create a new directory in the root directory of this repository called `learning-terraform-on-sapbtp`.
+As we are starting from scratch, create a new directory called `learning-terraform-on-sapbtp`. If you have cloned the repository you can place it in the root directory of the cloned repository.
+
 Navigate into the newly created directory and create an empty file called `provider.tf`. This file will contain the configuration of the Terraform provider for SAP BTP.
 
 Open the file and add the following code:

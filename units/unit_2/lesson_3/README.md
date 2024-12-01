@@ -12,12 +12,10 @@ Taking a look at the file system, some things have changed after the last unit w
 
 The first change that we see is a new directory called `.terraform`.
 
-TODO Picture
+![overview of files from terraform init](./images/u2l3_init_files.png)
 
 This directory was created by `terraform init` and contains the binaries of the providers defined in our configuration.
 Another file that was added by Terraform is the `.terraform.lock.hcl` which is a lock file containing the checksums that are considered to be valid with regards to the selected version of this provider on different platforms.
-
-TODO Picture
 
 The file that we want to focus on appeared after the `terraform apply`, namely the `terraform.tfstate` file. The state is one essential part of Terraform and "[...] is used by Terraform to map real world resources to your configuration, keep track of metadata, and to improve performance for large infrastructures.[...]" ([reference](https://developer.hashicorp.com/terraform/language/state)).
 
@@ -43,7 +41,7 @@ terraform show
 ```
 The output looks like this:
 
-TODO picture
+![console output of terraform show](./images/u2l3_terraform_show.png)
 
 This command outputs the whole state in a human-readable format and could be used to get a first overview over the whole state. As we have only one resource created up to now, this is still comprehensive. But imagine having several resources in a configuration. This becomes quite unhandy.
 
@@ -55,7 +53,7 @@ terraform state list
 
 The output looks like this:
 
-TODO picture
+![console output of terraform state list](./images/u2l3_terraform_state_list.png)
 
 As expected we see the one resource we created namely the so called *address* of the resource. To dive into the details of a single resource of the list, execute the command:
 
@@ -71,7 +69,7 @@ terraform state show 'btp_subaccount.project_subaccount'
 
 The output looks like this:
 
-TODO picture
+![console output of terraform state show](./images/u2l3_terraform_state_show.png)
 
 Now we are fully equipped to inspect the state file via the Terraform CLI
 
