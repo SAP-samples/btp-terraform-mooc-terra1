@@ -71,21 +71,21 @@ With the basic provider configuration in place, we must add the necessary inform
 - On Windows:
 
    ```pwsh
-   $env:BTP_USERNAME=<MY SAP BTP USERNAME>
-   $env:BTP_PASSWORD=<MY SAP BTP PASSWORD>
+   $env:CF_USER=<MY SAP BTP USERNAME>
+   $env:CF_PASSWORD=<MY SAP BTP PASSWORD>
    ```
 - On MacOS and Linux:
 
    ```bash
-   export BTP_USERNAME=<MY SAP BTP USERNAME>
-   export BTP_PASSWORD=<MY SAP BTP PASSWORD>
+   export CF_USE=<MY SAP BTP USERNAME>
+   export CF_PASSWORD=<MY SAP BTP PASSWORD>
    ```
 
 As an alternative on MacOS and Linux you can also create a new file called `.env` with the following content
 
 ```text
-BTP_USERNAME='MY SAP BTP USERNAME'
-BTP_PASSWORD='MY SAP BTP PASSWORD'
+CF_USER='MY SAP BTP USERNAME'
+CF_PASSWORD='MY SAP BTP PASSWORD'
 ```
 
 You can then export the two values in one go via:
@@ -211,7 +211,7 @@ terraform init
 
 The output should look like this:
 
-TODO picture
+![console output of terraform init for Cloud Foundry provider](./images/u4l1_terraform_init_cf_provider.png)
 
 You know the drill, next we execute:
 
@@ -223,22 +223,22 @@ terraform validate
 No errors in the validation, then let's move forward and execute the planning:
 
 ```bash
-terraform plan -out=unit34.out
+terraform plan -out=unit41.out
 ```
 
 The result should look like this:
 
-TODO picture
+![console output of terraform plan for Cloud Foundry provider](./images/u4l1_terraform_plan_cf_provider.png)
 
 Looks as expected, let's apply the change then:
 
 ```bash
-terraform apply 'unit34.out'
+terraform apply "unit41.out"
 ```
 
 The result should look like this:
 
-TODO picture
+![console output of terraform apply for Cloud Foundry provider](./images/u4l1_terraform_apply_cf_provider.png)
 
 Great, we created a new space in the Cloud Foundry organization and added us as user!
 

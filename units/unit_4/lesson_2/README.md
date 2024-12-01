@@ -53,10 +53,11 @@ No issues as expected, so let us directly apply the changes as they do not resul
 ```bash
 terraform apply
 ```
+We are prompted to accept the changes to the output, which we do as this is what we intended.
 
-The result should look like this:
+The output should look like this:
 
-TODO picture
+![console output of terraform apply with output of SAP BTP subaccount URL](./images/u4l2_terraform_apply_output_btp.png)
 
 Excellent, we have the URL as output. Let's switch to the Cloud Foundry space
 
@@ -89,6 +90,15 @@ output "cf_space_url" {
 ```
 We construct the URL by combining the variable `subaccount_url` and filling in the blanks for the ID of the organization using the variable `cf_org_id` and the ID of the space via the corresponding field of the resource `cloudfoundry_space`.
 
+Last thing we need to to is to add the value of the subacount URL to the `terraform.tfvars` file.
+
+```terraform
+subaccount_url     = "<URL of SAP BTP subaccount>"
+```
+
+> [!TIP]
+> If we do not have it at hand, we can always use the `terraform output` command in the `BTP` directory to get the value
+
 Done. As for the SAP BTP part, let's see if thing work. We switch to the directory `CloudFoundry` and do our homework:
 
 ```bash
@@ -102,9 +112,11 @@ Looks good, the let's apply the change:
 terraform apply
 ```
 
-The result should look like this:
+As before we are prompted to accept the changes to the output, which we do as this is what we intended.
 
-TODO screenshot
+The output should look like this:
+
+![console output of terraform apply with output of CF space URL](./images/u4l2_terraform_apply_output_cf.png)
 
 Success, we made the information that we would like to hand over to our developers available as output values.
 
