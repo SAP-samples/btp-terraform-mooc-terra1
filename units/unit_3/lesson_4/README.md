@@ -1,4 +1,4 @@
-# Unit 3 Lesson 4 - Setting up a Cloud Foundry environment via Terraform
+# Unit 3 Lesson 4 - Setting up a Cloud Foundry Environment via Terraform
 
 ## Goal 🎯
 

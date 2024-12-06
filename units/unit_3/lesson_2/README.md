@@ -1,4 +1,4 @@
-# Unit 3 Lesson 2 - Using Locals
+# Unit 3 Lesson 2 - Using Locals in a Terraform Configuration
 
 ## Goal 🎯
 

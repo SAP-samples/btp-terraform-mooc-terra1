@@ -26,29 +26,29 @@ Depending on the setup described in [unit 1 lesson 3](./units/unit_1/lesson_3/RE
 
 The repository is structured in line with the layout of the course. The walkthrough of the code for every lesson is described in an extensive `README.md`. We also provide the solution for each lesson as part of the corresponding directory in this repository.
 
-### Unit 1
+### Unit 1 - Getting Started with Infrastructure as Code
 
 - [Lesson 3 - Preparing the setup for Terraform on SAP BTP](./units/unit_1/lesson_3/README.md)
 
-### Unit 2
+### Unit 2 - Setting Up a First Terraform Configuration
 
 - [Lesson 1 - Configuring the first basic Terraform setup ](./units/unit_2/lesson_1/README.md)
 - [Lesson 2 - Applying the Terraform setup to SAP BTP](./units/unit_2/lesson_2/README.md)
 - [Lesson 3 - Inspecting the Terraform state](./units/unit_2/lesson_3/README.md)
 
-### Unit 3
+### Unit 3 - Enhancing the Terraform Configuration
 
-- [Lesson 1 - Using Variables](./units/unit_3/lesson_1/README.md)
-- [Lesson 2 - Using Locals](./units/unit_3/lesson_2/README.md)
-- [Lesson 3 - Adding additional resources to the Terraform Configuration](./units/unit_3/lesson_3/README.md)
-- [Lesson 4 - Setting up a Cloud Foundry environment via Terraform](./units/unit_3/lesson_4/README.md)
+- [Lesson 1 - Using Variables in a Terraform Configuration](./units/unit_3/lesson_1/README.md)
+- [Lesson 2 - Using Locals in a Terraform Configuration](./units/unit_3/lesson_2/README.md)
+- [Lesson 3 - Adding Multiple Resources to the Terraform Configuration](./units/unit_3/lesson_3/README.md)
+- [Lesson 4 - Setting up a Cloud Foundry Environment via Terraform](./units/unit_3/lesson_4/README.md)
 
-### Unit 4
+### Unit 4 - Applying Advanced Terraform Concepts
 
-- [Lesson 1 - Moving to a multi-provider setup](./units/unit_4/lesson_1/README.md)
+- [Lesson 1 - Enhancing the Setup with Additional Providers](./units/unit_4/lesson_1/README.md)
 - [Lesson 2 - Handing over to the development team](./units/unit_4/lesson_2/README.md)
-- [Lesson 3 - Extracting reuseable logic into modules](./units/unit_4/lesson_3/README.md)
-- [Lesson 4 - Iterating over lists in Terraform](./units/unit_4/lesson_4/README.md)
+- [Lesson 3 - Extracting Reuseable Logic into Modules](./units/unit_4/lesson_3/README.md)
+- [Lesson 4 - Iterating over Lists in Terraform](./units/unit_4/lesson_4/README.md)
 
 ## Support, Feedback, Contributing
 

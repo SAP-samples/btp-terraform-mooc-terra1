@@ -1,4 +1,4 @@
-# Unit 4 Lesson 1 - Moving to a multi-provider setup
+# Unit 4 Lesson 1 - Enhancing the Setup with Additional Providers
 
 ## Goal 🎯
 

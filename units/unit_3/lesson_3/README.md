@@ -1,4 +1,4 @@
-# Unit 3 Lesson 3 - Adding additional resources to the Terraform Configuration
+# Unit 3 Lesson 3 - Adding Multiple Resources to the Terraform Configuration
 
 ## Goal 🎯
 

@@ -1,4 +1,4 @@
-# Unit 3 Lesson 1 - Using Variables
+# Unit 3 Lesson 1 - Using Variables in a Terraform Configuration
 
 ## Goal 🎯
 

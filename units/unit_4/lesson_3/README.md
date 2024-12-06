@@ -1,4 +1,4 @@
-# Unit 4 Lesson 3 - Extracting reuseable logic into modules
+# Unit 4 Lesson 3 - Extracting Reuseable Logic into Modules
 
 ## Goal 🎯
 
