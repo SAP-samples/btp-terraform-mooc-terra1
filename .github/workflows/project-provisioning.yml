@@ -74,7 +74,7 @@ jobs:
             export TF_VAR_globalaccount=${{ secrets.GLOBALACCOUNT }}
             export TF_VAR_project_name=${{ steps.output_issue_data.outputs.project-name }}
             export TF_VAR_subaccount_region=${{ steps.output_issue_data.outputs.subaccount-region }}
-            export TF_VAR_subaccount_stage= ${{ steps.output_issue_data.outputs.subaccount-stage }}
+            export TF_VAR_subaccount_stage=${{ steps.output_issue_data.outputs.subaccount-stage }}
             export TF_VAR_project_costcenter=${{ steps.output_issue_data.outputs.cost-center }}
             terraform -chdir=${{ env.PATH_TO_TFSCRIPT_BTP }} apply -auto-approve -no-color
             cf-api-url=$(terraform -chdir=${{ env.PATH_TO_TFSCRIPT_BTP }} output cf_api_url) | echo "cf_api_url=$cf-api-url" >> $GITHUB_OUTPUT
@@ -94,7 +94,7 @@ jobs:
             export CF_PASSWORD=${{ secrets.BTP_PASSWORD }}
             export TF_VAR_globalaccount=${{ secrets.GLOBALACCOUNT }}
             export TF_VAR_project_name=${{ steps.output_issue_data.outputs.project-name }}
-            export TF_VAR_subaccount_stage= ${{ steps.output_issue_data.outputs.subaccount-stage }}
+            export TF_VAR_subaccount_stage=${{ steps.output_issue_data.outputs.subaccount-stage }}
             export TF_VAR_cf_org_id=${{ steps.terraform_apply_btp.outputs.cf_org_id }}
             export TF_VAR_cf_api_url=${{ steps.terraform_apply_btp.outputs.cf_api_url }}
             export TF_VAR_subaccount_url=${{ steps.terraform_apply_btp.outputs.subaccount_url }}
