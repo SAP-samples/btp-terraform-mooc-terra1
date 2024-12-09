@@ -120,6 +120,24 @@ The output should look like this:
 
 Success, we made the information that we would like to hand over to our developers available as output values.
 
+## Bonus
+
+To make things more tangible we created a sample setup of this lesson using [GitHub Issues](https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues) including the [issue form feature](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms) for the request a [GitHub Action](https://docs.github.com/en/actions) to execute the setup and a [GitHub environment](https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-deployments/managing-environments-for-deployment) to model the approval.
+
+The flow is:
+
+1. A team requests a new subaccount via an issue. The requestor has to enter some basic information into the form.
+1. Once the issue is created a GitHub Action workflow pics up the issue. The workflow is attached to a GitHub deployment environment. Consequently a approval needs to be done by the admin team.
+1. After the approval the workflow extracts the information from the issue and starts the provisioning. First the subaccount and the Cloud Foundry Environment get created. The output is used in the second step to create the Cloud Foundry space.
+1. Once the deployment finished successfully the issue gets updated with the output relevant for the development team i.e., the URL of the subaccount and the Cloud Foundry space, as well as the API endpoint of the Clooud Foundry environment.
+
+You find the code in the directory `.github/samples`:
+
+- The issue template [`account_request.yml`](.github/samples/account_request.yml)
+- The GitHub Action workflow [`project-provisioning.yml`](.github/samples/project-provisioning.yml)
+
+You can also find the corresponding setup in this [GitHub repository](https://github.com/btp-automation-scenarios/terraform-multistep-approval).
+
 ## Summary 🪄
 
 To make the onboarding of development teams a smooth experience we added some additional output values to our configuration. We also leveraged one additional data source to fetch the information from our global account.

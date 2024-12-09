@@ -1,4 +1,4 @@
-name: Subaccount Request
+name: 🛠️ Subaccount Request
 description: File a request to create a project subaccount
 title: "[ACCOUNT REQUEST]"
 labels: [account-request]
@@ -39,9 +39,9 @@ body:
     validations:
       required: true
   - type: input
-    id: space-admin
+    id: space-manager
     attributes:
-      label: Cloud Foundry Space Administrator
-      description: Please enter the email of the space administrator.
+      label: Cloud Foundry Space Manager
+      description: Please enter the email of the space manager.
     validations:
       required: true

@@ -1,0 +1,132 @@
+name: Project Provisioning
+
+concurrency:
+  group: dev
+  cancel-in-progress: true
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+env:
+  PATH_TO_TFSCRIPT_BTP: 'infra/BTP'
+  PATH_TO_TFSCRIPT_CF: 'infra/CloudFoundry'
+
+jobs:
+  create_subaccount:
+    name: Create Subaccount for Project
+    if: ${{ !github.event.issue.pull_request }} && contains(github.event.issue.body, 'Project Name')
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+####
+# If you want to add a manual approval step instead of using environments on GitHub, uncomment the following lines
+# In Addition remove the environment: dev line from the job definition and the concurrency group definition
+####
+#      - name: trigger approval
+#        uses: trstringer/manual-approval@v1
+#        with:
+#          secret: ${{ github.TOKEN }}
+#          approvers: lechnerc77
+#          minimum-approvals: 1
+#          issue-title: "Approval of new project subaccount"
+#          issue-body: "Please approve or deny the request."
+#          exclude-workflow-initiator-as-approver: false
+#          additional-approved-words: ''
+#          additional-denied-words: ''
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Extract Issue Data
+        id: extract_data
+        uses: issue-ops/parser@v4
+        with:
+          body: ${{ github.event.issue.body }}
+          issue-form-template: account_request.yml
+
+      - name: Output Issue JSON
+        id: output_issue_data
+        run: |
+          echo '${{ steps.extract_data.outputs.json }}' | jq '.' > local.json
+          echo "project-name=$(jq -r '."project-name"' local.json)" >> $GITHUB_OUTPUT
+          echo "cost-center=$(jq -r '."cost-center"' local.json)" >> $GITHUB_OUTPUT
+          echo "space-manager=$(jq -r '."space-manager"' local.json)" >> $GITHUB_OUTPUT
+          echo "subaccount-region=$(jq -r '."subaccount-region"[0]' local.json)" >> $GITHUB_OUTPUT
+          echo "subaccount-stage=$(jq -r '."subaccount-stage"[0]' local.json)" >> $GITHUB_OUTPUT
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+          terraform_version: latest
+
+      - name: Init Terraform for BTP
+        shell: bash
+        run: |
+          terraform -chdir=${{ env.PATH_TO_TFSCRIPT_BTP }} init -no-color
+
+      - name: Terraform Apply for BTP
+        shell: bash
+        run: |
+            export BTP_USERNAME=${{ secrets.BTP_USERNAME }}
+            export BTP_PASSWORD=${{ secrets.BTP_PASSWORD }}
+            export TF_VAR_globalaccount=${{ secrets.GLOBALACCOUNT }}
+            export TF_VAR_project_name='${{ steps.output_issue_data.outputs.project-name }}'
+            export TF_VAR_subaccount_region=${{ steps.output_issue_data.outputs.subaccount-region }}
+            export TF_VAR_subaccount_stage=${{ steps.output_issue_data.outputs.subaccount-stage }}
+            export TF_VAR_project_costcenter=${{ steps.output_issue_data.outputs.cost-center }}
+            terraform -chdir=${{ env.PATH_TO_TFSCRIPT_BTP }} apply -auto-approve -no-color
+
+      - name: Transfer BTP output values
+        id: terraform_output_btp
+        shell: bash
+        run: |
+          terraform -chdir=${{ env.PATH_TO_TFSCRIPT_BTP }} output -json > output_btp.json
+          echo "cf_api_url=$(jq -r '.cf_api_url.value' output_btp.json)" >> $GITHUB_OUTPUT
+          echo "cf_org_id=$(jq -r '.cf_org_id.value' output_btp.json)" >> $GITHUB_OUTPUT
+          echo "subaccount_url=$(jq -r '.subaccount_url.value' output_btp.json)" >> $GITHUB_OUTPUT
+
+      - name: Init Terraform for CF
+        shell: bash
+        run: |
+          terraform -chdir=${{ env.PATH_TO_TFSCRIPT_CF }} init -no-color
+
+      - name: Terraform Apply for CF
+        shell: bash
+        run: |
+            export CF_USER=${{ secrets.BTP_USERNAME }}
+            export CF_PASSWORD=${{ secrets.BTP_PASSWORD }}
+            export TF_VAR_project_name='${{ steps.output_issue_data.outputs.project-name }}'
+            export TF_VAR_subaccount_stage=${{ steps.output_issue_data.outputs.subaccount-stage }}
+            export TF_VAR_cf_org_id=${{ steps.terraform_output_btp.outputs.cf_org_id }}
+            export TF_VAR_cf_api_url=${{ steps.terraform_output_btp.outputs.cf_api_url }}
+            export TF_VAR_subaccount_url=${{ steps.terraform_output_btp.outputs.subaccount_url }}
+            export TF_VAR_cf_space_manager=${{ steps.output_issue_data.outputs.space-manager }}
+            export TF_VAR_cf_space_developer=${{ steps.output_issue_data.outputs.space-manager }}
+            terraform -chdir=${{ env.PATH_TO_TFSCRIPT_CF }} apply -auto-approve -no-color
+
+      - name: Transfer Cloud Foundry output values
+        id: terraform_output_cf
+        shell: bash
+        run: |
+            terraform -chdir=${{ env.PATH_TO_TFSCRIPT_CF }} output -json > output_cf.json
+            echo "cf_space_url=$(jq -r '.cf_space_url.value' output_cf.json)" >> $GITHUB_OUTPUT
+
+      - name: Add comment to issue
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            The subaccount for the project has been created successfully 🎉
+
+            Here is the relevant information for the project team:
+
+              Subaccount URL: ${{ steps.terraform_output_btp.outputs.subaccount_url }}
+              CF API URL: ${{ steps.terraform_output_btp.outputs.cf_api_url }}
+              CF Space URL: ${{ steps.terraform_output_cf.outputs.cf_space_url }}
+
+            🚀 Build some awesome apps with it!
