@@ -126,10 +126,10 @@ To make things more tangible we created a sample setup of this lesson using [Git
 
 The flow is:
 
-1. A team requests a new subaccount via an issue. The requestor has to enter some basic information into the form.
+1. A team requests a new subaccount via an issue. The requester has to enter some basic information into the form.
 1. Once the issue is created a GitHub Action workflow pics up the issue. The workflow is attached to a GitHub deployment environment. Consequently a approval needs to be done by the admin team.
 1. After the approval the workflow extracts the information from the issue and starts the provisioning. First the subaccount and the Cloud Foundry Environment get created. The output is used in the second step to create the Cloud Foundry space.
-1. Once the deployment finished successfully the issue gets updated with the output relevant for the development team i.e., the URL of the subaccount and the Cloud Foundry space, as well as the API endpoint of the Clooud Foundry environment.
+1. Once the deployment finished successfully the issue gets updated with the output relevant for the development team i.e., the URL of the subaccount and the Cloud Foundry space, as well as the API endpoint of the Cloud Foundry environment.
 
 You find the code in the directory `.github/samples`:
 
