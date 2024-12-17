@@ -133,8 +133,8 @@ The flow is:
 
 You find the code in the directory `.github/samples`:
 
-- The issue template [`account_request.yml`](.github/samples/account_request.yml)
-- The GitHub Action workflow [`project-provisioning.yml`](.github/samples/project-provisioning.yml)
+- The issue template [`account_request.yml`](samples/account_request.yml)
+- The GitHub Action workflow [`project-provisioning.yml`](samples/project-provisioning.yml)
 
 You can also find the corresponding setup in this [GitHub repository](https://github.com/btp-automation-scenarios/terraform-multistep-approval).
 
