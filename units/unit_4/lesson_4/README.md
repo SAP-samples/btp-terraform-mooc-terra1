@@ -1,4 +1,4 @@
-# Lesson 4 Lesson 4 - Iterating over Lists in Terraform
+# Unit 4 Lesson 4 - Iterating over Lists in Terraform
 
 ## Goal 🎯
 
