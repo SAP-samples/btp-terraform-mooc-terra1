@@ -107,6 +107,10 @@ Let us apply this first configuration. The application of configurations follows
 
    ![console output of terraform apply](./images/u2l2_terraform_apply.png)
 
+
+> [!TIP]
+> In case you are facing the error `Subdomain dev-project-abc already exists in the current region` when executing the `terraform apply` command, change the value of the subdomain to a unique value. We will show you how to make this this value unique via a Terraform resource in [unit 3 lesson 2](../../unit_3/lesson_2/README.md).
+
 Let is also check that in the SAP BTP Cockpit:
 
 ![SAP BTP cockpit - overview of subaccounts](./images/u2l2_sap_btp_cockpit.png)
