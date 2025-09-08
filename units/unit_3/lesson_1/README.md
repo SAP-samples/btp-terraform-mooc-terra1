@@ -263,5 +263,5 @@ You find the sample solution in the directory `units/unit_3/lesson_1/solution_u3
 - [Input variables](https://developer.hashicorp.com/terraform/language/values/variables)
 - [Input variables - type constraints](https://developer.hashicorp.com/terraform/language/values/variables#type-constraints)
 - [Input variables - assigning values](https://developer.hashicorp.com/terraform/language/values/variables#assigning-values-to-root-module-variables)
-- [Input variable validation](https://developer.hashicorp.com/terraform/language/expressions/custom-conditions#input-variable-validation)
+- [Input variable validation](https://developer.hashicorp.com/terraform/language/validate#input-variable-validation)
 - [Terraform functions](https://developer.hashicorp.com/terraform/language/functions)
