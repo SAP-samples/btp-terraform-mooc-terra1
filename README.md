@@ -50,7 +50,7 @@ The repository is structured in line with the layout of the course. The walkthro
 
 ## Support, Feedback, Contributing
 
-❓ - If you have a *question* you can ask it here in [GitHub Discussions](https://github.com/SAP-samples/btp-terraform-mooc-terra1/discussions/) or in the [SAP Community](https://answers.sap.com/questions/ask.html).
+❓ - If you have a *question* you can ask it here in [GitHub Discussions](https://github.com/SAP-samples/btp-terraform-mooc-terra1/discussions/) or in the [SAP Community](https://community.sap.com/).
 
 🐞 - If you find a bug, feel free to create a [bug report](https://github.com/SAP-samples/btp-terraform-mooc-terra1/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml&title=%5BBUG%5D).
 
