@@ -9,6 +9,9 @@ on:
         - ready_for_review
     workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
     terraform-validate:
       name: Validate Syntax of Terraform Files
