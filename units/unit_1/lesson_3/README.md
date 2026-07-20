@@ -81,7 +81,7 @@ The dev container will automatically start and you are ready to go.
 
 ### GitHub Codespace
 
-To use [Codespaces](https://docs.github.com/codespaces/overview) you must have a GitHub account. If you don't have one, [sign-up on GitHub](https://github.com/signup) before going through the following steps.
+To use [Codespaces](https://docs.github.com/codespaces/overview) you must have a GitHub account. If you don't have one, [sign-up on GitHub](https://github.com) before going through the following steps.
 
 You can then access the Codespace following these steps:
 
