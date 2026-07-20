@@ -18,7 +18,7 @@ There are some requirements you must fulfill before being able to start with the
 Depending on the setup described in [unit 1 lesson 3](./units/unit_1/lesson_3/README.md) further prerequisites are required:
 
 - If you intend to use the [recommended 'dev container' tools option](./units/unit_1/lesson_3/README.md) you must have [Docker Desktop](https://www.docker.com/products/docker-desktop/) and [Visual Studio Code](https://code.visualstudio.com/) including the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension installed on your machine.
-- You want to use A GitHub Codespace you must have a GitHub user. If you don't have one, [sign-up on GitHub](https://github.com/signup).
+- You want to use A GitHub Codespace you must have a GitHub user. If you don't have one, [sign-up on GitHub](https://github.com).
 
 ## Content Structure
 
