@@ -2,7 +2,11 @@
   "name": "Terraform dev container",
   "image": "mcr.microsoft.com/devcontainers/base:debian",
   "features": {
-    "ghcr.io/devcontainers/features/terraform:1": {},
+    "ghcr.io/devcontainers/features/terraform:1": {
+			"version": "1.15.5",
+			"tflint": "none",
+			"terragrunt": "none"
+		},
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
   "customizations": {
@@ -15,6 +19,7 @@
     },
     "codespaces": {}
   },
+  "postCreateCommand": "bash ./.devcontainer/scripts/install-tflint.sh",
   "hostRequirements": {
     "memory": "4gb"
   },
